@@ -22,7 +22,7 @@ public class TelephoneUser {
 	private String number;
 	
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
-	private UsuarioPessoa usuarioPessoa;
+	private UserPerson userPerson;
 
 	public Long getId() {
 		return id;
@@ -48,17 +48,17 @@ public class TelephoneUser {
 		this.number = number;
 	}
 	
-	public UsuarioPessoa getUsuarioPessoa() {
-		return usuarioPessoa;
+	public UserPerson getUserPerson() {
+		return userPerson;
 	}
 	
-	public void setUsuarioPessoa(UsuarioPessoa usuarioPessoa) {
-		this.usuarioPessoa = usuarioPessoa;
+	public void setUserPerson(UserPerson userPerson) {
+		this.userPerson = userPerson;
 	}
 
 	@Override
 	public String toString() {
-		return "TelephoneUser [id=" + id + ", type=" + type + ", number=" + number + ", usuarioPessoa=" + usuarioPessoa
+		return "TelephoneUser [id=" + id + ", type=" + type + ", number=" + number + ", usuarioPessoa=" + userPerson
 				+ "]";
 	}
 	

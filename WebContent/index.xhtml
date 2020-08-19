@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html">
-	
+
 <h:head>
 
 </h:head>
@@ -10,9 +10,39 @@
 <h:body>
 
 	<h:form>
-		<h:outputLabel>Hello JSF</h:outputLabel>
+		<h:panelGrid columns="2">
+			<h:outputLabel>Id:</h:outputLabel>
+			<h:inputText readonly="true"
+				value="#{userPersonManagedBean.userPerson.id}" />
+
+			<h:outputLabel>Name:</h:outputLabel>
+			<h:inputText 
+				value="#{userPersonManagedBean.userPerson.name}" />
+
+			<h:outputLabel>Surname:</h:outputLabel>
+			<h:inputText 
+				value="#{userPersonManagedBean.userPerson.surname}" />			
+
+			<h:outputLabel>Email:</h:outputLabel>
+			<h:inputText 
+				value="#{userPersonManagedBean.userPerson.email}" />		
+							
+			<h:outputLabel>Age:</h:outputLabel>
+			<h:inputText 
+				value="#{userPersonManagedBean.userPerson.age}" />		
+				
+			<h:outputLabel>Login:</h:outputLabel>
+			<h:inputText 
+				value="#{userPersonManagedBean.userPerson.login}" />	
+				
+			<h:outputLabel>Password:</h:outputLabel>
+			<h:inputSecret 
+				value="#{userPersonManagedBean.userPerson.password}" />
+															
+		</h:panelGrid>
 	</h:form>
 
-</h:body>	
-	  
+
+</h:body>
+
 </html>

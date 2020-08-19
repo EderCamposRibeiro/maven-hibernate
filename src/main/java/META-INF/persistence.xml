@@ -6,7 +6,7 @@
 	
 	<persistence-unit name="maven-hibernate">
 	
-		<class>model.UsuarioPessoa</class>
+		<class>model.UserPerson</class>
 		<class>model.TelephoneUser</class>
 	
 		<properties>

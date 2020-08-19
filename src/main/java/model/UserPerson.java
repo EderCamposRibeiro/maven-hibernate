@@ -13,31 +13,31 @@ import javax.persistence.OneToMany;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name = "UsuarioPessoa.findAll", query = "select u from UsuarioPessoa u"),
-	@NamedQuery(name = "UsuarioPessoa.findByName", query = "select u from UsuarioPessoa u where u.nome = :nome")
+	@NamedQuery(name = "UserPerson.findAll", query = "select u from UserPerson u"),
+	@NamedQuery(name = "UserPerson.findByName", query = "select u from UserPerson u where u.name = :name")
 })
-public class UsuarioPessoa {
+public class UserPerson {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String nome;
-	private String sobrenome;
+	private String name;
+	private String surname;
 	private String email;
 	private String login;
-	private String senha;
-	private Integer idade;
+	private String password;
+	private Integer age;
 	
-	@OneToMany(mappedBy = "usuarioPessoa", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "userPerson", fetch = FetchType.EAGER)
 	private List<TelephoneUser> telephoneUsers;
 	
-	public Integer getIdade() {
-		return idade;
+	public Integer getAge() {
+		return age;
 	}
 	
-	public void setIdade(Integer idade) {
-		this.idade = idade;
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 
 	public Long getId() {
@@ -48,20 +48,20 @@ public class UsuarioPessoa {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getName() {
+		return name;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getSobrenome() {
-		return sobrenome;
+	public String getSurname() {
+		return surname;
 	}
 
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
 	public String getEmail() {
@@ -80,12 +80,12 @@ public class UsuarioPessoa {
 		this.login = login;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	public List<TelephoneUser> getTelephoneUsers() {
@@ -98,8 +98,8 @@ public class UsuarioPessoa {
 
 	@Override
 	public String toString() {
-		return "UsuarioPessoa [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", email=" + email
-				+ ", login=" + login + ", senha=" + senha + ", idade=" + idade + ", telephoneUsers=" + telephoneUsers
+		return "UserPerson [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email
+				+ ", login=" + login + ", password=" + password + ", age=" + age + ", telephoneUsers=" + telephoneUsers
 				+ "]";
 	}
 
