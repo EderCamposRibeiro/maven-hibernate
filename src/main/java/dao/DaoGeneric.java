@@ -53,12 +53,12 @@ public class DaoGeneric<E> {
 		entityManager
 				.createNativeQuery(
 						"delete from " + entity.getClass().getSimpleName().toLowerCase() + " where id = " + id)
-				.executeUpdate(); // Faz o delete
+				.executeUpdate(); // Do the deletion
 
-		transaction.commit(); // Grava a alteração/transação no Banco!!!
+		transaction.commit(); // Save the change/transaction on Database!!!
 	}
 
-	public List<E> listar(Class<E> entity) {
+	public List<E> list(Class<E> entity) {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 

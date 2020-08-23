@@ -1,5 +1,8 @@
 package managedBean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -11,7 +14,8 @@ import model.UserPerson;
 public class UserPersonManagedBean {
 
 	private UserPerson userPerson = new UserPerson();
-	private DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<>();
+	private DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
+	private List<UserPerson> list = new ArrayList<UserPerson>();
 
 	public UserPerson getUserPerson() {
 		return userPerson;
@@ -29,5 +33,10 @@ public class UserPersonManagedBean {
 	public String newPerson() {
 		userPerson = new UserPerson();/*Erase the screen*/
 		return "";
+	}
+	
+	public List<UserPerson> getList() {
+		list = daoGeneric.list(UserPerson.class);
+		return list;
 	}
 }

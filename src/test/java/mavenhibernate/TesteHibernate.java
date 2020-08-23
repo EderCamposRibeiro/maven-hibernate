@@ -80,7 +80,7 @@ public class TesteHibernate {
 	public void testConsult() {
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 
-		List<UserPerson> list = daoGeneric.listar(UserPerson.class);
+		List<UserPerson> list = daoGeneric.list(UserPerson.class);
 
 		for (UserPerson userPerson : list) {
 			System.out.println(userPerson);
