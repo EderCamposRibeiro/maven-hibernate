@@ -21,5 +21,13 @@ public class UserPersonManagedBean {
 		this.userPerson = userPerson;
 	}
 
-
+	public String save() {
+		daoGeneric.save(userPerson);
+		return ""; /*If returns Null stays on the same screen*/
+	}
+	
+	public String newPerson() {
+		userPerson = new UserPerson();/*Erase the screen*/
+		return "";
+	}
 }

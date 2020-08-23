@@ -23,42 +23,42 @@ public class TesteHibernate {
 		person.setSurname("Mazzoccante");
 		person.setEmail("edercribeiro@gmail.com");
 
-		daoGeneric.salvar(person);
+		daoGeneric.save(person);
 
 	}
 
 	@Test
-	public void testeBuscar() {
+	public void testFind() {
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 
 		UserPerson person = new UserPerson();
 
 		person.setId(12L);
 
-		person = daoGeneric.pesquisar(person);
+		person = daoGeneric.find(person);
 
 		System.out.println(person);
 
 	}
 
 	@Test
-	public void testeBuscar2() {
+	public void testFind2() {
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 
-		UserPerson person = daoGeneric.pesquisar2(11L, UserPerson.class);
+		UserPerson person = daoGeneric.find2(11L, UserPerson.class);
 
 		System.out.println(person);
 
 	}
 
 	@Test
-	public void testeUpdate() {
+	public void testUpdate() {
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 
-		UserPerson person = daoGeneric.pesquisar2(11L, UserPerson.class);
+		UserPerson person = daoGeneric.find2(11L, UserPerson.class);
 
 		person.setAge(99);
-		person.setName("Nome Atualizado Hibernate");
+		person.setName("Updated Name Hibernate");
 
 		daoGeneric.updateMerge(person);
 
@@ -67,23 +67,23 @@ public class TesteHibernate {
 	}
 
 	@Test
-	public void testeDelete() {
+	public void testDelete() {
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 
-		UserPerson person = daoGeneric.pesquisar2(19L, UserPerson.class);
+		UserPerson person = daoGeneric.find2(19L, UserPerson.class);
 
-		daoGeneric.deletarPorId(person);
+		daoGeneric.deleteById(person);
 
 	}
 
 	@Test
-	public void testeConsultar() {
+	public void testConsult() {
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 
 		List<UserPerson> list = daoGeneric.listar(UserPerson.class);
 
-		for (UserPerson usuarioPessoa : list) {
-			System.out.println(usuarioPessoa);
+		for (UserPerson userPerson : list) {
+			System.out.println(userPerson);
 			System.out.println("-------------------------");
 		}
 
@@ -96,8 +96,8 @@ public class TesteHibernate {
 		List<UserPerson> list = daoGeneric.getEntityManager().createQuery(" from UserPerson where name = 'Eder'")
 				.getResultList();
 
-		for (UserPerson usuarioPessoa : list) {
-			System.out.println(usuarioPessoa);
+		for (UserPerson userPerson : list) {
+			System.out.println(userPerson);
 			System.out.println("-------------------------");
 		}
 
@@ -113,51 +113,51 @@ public class TesteHibernate {
 				setMaxResults(3).
 				getResultList();
 
-		for (UserPerson usuarioPessoa : list) {
-			System.out.println(usuarioPessoa);
+		for (UserPerson userPerson : list) {
+			System.out.println(userPerson);
 			System.out.println("-------------------------");
 		}
 	}
 	
 	@Test
-	public void testeQueryListParameter() {
+	public void testQueryListParameter() {
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 		
 		List<UserPerson> list = daoGeneric.getEntityManager().
 				createQuery(" from UserPerson where name = :name").
 				setParameter("name", "Eder").getResultList();
 		
-		for (UserPerson usuarioPessoa : list) {
-			System.out.println(usuarioPessoa);
+		for (UserPerson userPerson : list) {
+			System.out.println(userPerson);
 			System.out.println("-------------------------");
 		}
 		
 	}
 	
 	@Test
-	public void testeQuerySomaIdade() {
+	public void testQueryAddAges() {
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 		
 		Long addAge = (Long) daoGeneric.getEntityManager().
 				createQuery("select sum(u.age) from UserPerson u ").
 				getSingleResult();
 		
-		System.out.println("Soma das Idades = " + addAge);
+		System.out.println("Sum of Ages = " + addAge);
 	}	
 	
 	@Test
-	public void testeQueryMediaIdade() {
+	public void testQueryAverageAge() {
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 		
 		Double averageAge = (Double) daoGeneric.getEntityManager().
 				createQuery("select avg(u.age) from UserPerson u ").
 				getSingleResult();
 		
-		System.out.println("Média das Idades = " + averageAge);
+		System.out.println("Average Ages = " + averageAge);
 	}	
 	
 	@Test
-	public void testeNamedQuery1() {
+	public void testNamedQuery1() {
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 		List<UserPerson> list = daoGeneric.getEntityManager().
 				createNamedQuery("UserPerson.findAll").getResultList();
@@ -170,15 +170,15 @@ public class TesteHibernate {
 	}
 	
 	@Test
-	public void testeNamedQuery2() {
+	public void testNamedQuery2() {
 		DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 		List<UserPerson> list = daoGeneric.getEntityManager().
 				createNamedQuery("UserPerson.findByName").
 				setParameter("nome", "Eder").
 				getResultList();
 		
-		for (UserPerson usuarioPessoa : list) {
-			System.out.println(usuarioPessoa);
+		for (UserPerson userPerson : list) {
+			System.out.println(userPerson);
 			System.out.println("-------------------------");
 		}
 		
@@ -188,14 +188,14 @@ public class TesteHibernate {
 	public void testSetPhone() {
 		DaoGeneric daoGeneric = new DaoGeneric();
 		
-		UserPerson person = (UserPerson) daoGeneric.pesquisar2(22L, UserPerson.class);
+		UserPerson person = (UserPerson) daoGeneric.find2(22L, UserPerson.class);
 		
 		TelephoneUser telephoneUser = new TelephoneUser();
 		telephoneUser.setType("Work");
 		telephoneUser.setNumber("6122224455");
 		telephoneUser.setUserPerson(person);
 		
-		daoGeneric.salvar(telephoneUser);
+		daoGeneric.save(telephoneUser);
 		
 	}
 	
@@ -203,7 +203,7 @@ public class TesteHibernate {
 	public void testFindPhones() {
 		DaoGeneric daoGeneric = new DaoGeneric();
 		
-		UserPerson person = (UserPerson) daoGeneric.pesquisar2(21L, UserPerson.class);
+		UserPerson person = (UserPerson) daoGeneric.find2(21L, UserPerson.class);
 		
 		for (TelephoneUser phone : person.getTelephoneUsers()) {
 			System.out.println(phone.getUserPerson().getName());			

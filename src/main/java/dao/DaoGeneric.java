@@ -11,62 +11,62 @@ public class DaoGeneric<E> {
 
 	private EntityManager entityManager = HibernateUtil.getEntityManager();
 
-	public void salvar(E entidade) {
+	public void save(E entity) {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
-		entityManager.persist(entidade);
+		entityManager.persist(entity);
 		transaction.commit();
 	}
 
-	public E updateMerge(E entidade) { /* Salva ou atualiza */
+	public E updateMerge(E entity) { /* Save or update */
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 
-		E entidadeSalva = entityManager.merge(entidade);
+		E entitySaved = entityManager.merge(entity);
 		transaction.commit();
 
-		return entidadeSalva;
+		return entitySaved;
 	}
 
-	public E pesquisar(E entidade) {
-		Object id = HibernateUtil.getPrimaryKey(entidade);
+	public E find(E entity) {
+		Object id = HibernateUtil.getPrimaryKey(entity);
 
-		E e = (E) entityManager.find(entidade.getClass(), id);
+		E e = (E) entityManager.find(entity.getClass(), id);
 
 		return e;
 	}
 
-	public E pesquisar2(Long id, Class<E> entidade) {
+	public E find2(Long id, Class<E> entity) {
 
-		E e = (E) entityManager.find(entidade, id);
+		E e = (E) entityManager.find(entity, id);
 
 		return e;
 	}
 
-	public void deletarPorId(E entidade) {
+	public void deleteById(E entity) {
 
-		Object id = HibernateUtil.getPrimaryKey(entidade);
+		Object id = HibernateUtil.getPrimaryKey(entity);
 
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 
 		entityManager
 				.createNativeQuery(
-						"delete from " + entidade.getClass().getSimpleName().toLowerCase() + " where id = " + id)
+						"delete from " + entity.getClass().getSimpleName().toLowerCase() + " where id = " + id)
 				.executeUpdate(); // Faz o delete
 
 		transaction.commit(); // Grava a alteração/transação no Banco!!!
 	}
 
-	public List<E> listar(Class<E> entidade) {
+	public List<E> listar(Class<E> entity) {
 		EntityTransaction transaction = entityManager.getTransaction();
 		transaction.begin();
 
-		List<E> lista = entityManager.createQuery("from " + entidade.getName()).getResultList();
+		List<E> list = entityManager.createQuery("from " + entity.getName()).getResultList();
 
 		transaction.commit();
 
-		return lista;
+		return list;
 	}
 	
 	public EntityManager getEntityManager() {
