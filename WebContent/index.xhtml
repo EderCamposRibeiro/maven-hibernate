@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
@@ -40,26 +41,37 @@
 				value="#{userPersonManagedBean.userPerson.password}" />
 															
 		</h:panelGrid>
+		<br/>
+		<br/>
 		<h:commandButton value="Save" action="#{userPersonManagedBean.save}"/>
 		<h:commandButton value="New" action="#{userPersonManagedBean.newPerson}"/>
+		<br/>
+		<br/>
+		<h:dataTable value="#{userPersonManagedBean.list}" var="user" cellpadding="15" border="1">
 		
-		<h:dataTable value="#{userPersonManagedBean.list}" var="user">
+			<f:facet name="header">Lista de Usuários:</f:facet>
 			<h:column>
+				<f:facet name="header">Id:</f:facet>
 				<h:outputText value="#{user.id}"/>
 			</h:column>
 			<h:column>
+				<f:facet name="header">Name:</f:facet>
 				<h:outputText value="#{user.name}"/>
 			</h:column>
 			<h:column>
+				<f:facet name="header">Surname:</f:facet>
 				<h:outputText value="#{user.surname}"/>
 			</h:column>	
 			<h:column>
+				<f:facet name="header">Email:</f:facet>
+				<h:outputText value="#{user.email}"/>
+			</h:column>				
+			<h:column>
+				<f:facet name="header">Age:</f:facet>
 				<h:outputText value="#{user.age}"/>
 			</h:column>					
 			<h:column>
-				<h:outputText value="#{user.email}"/>
-			</h:column>							
-			<h:column>
+				<f:facet name="header">Login:</f:facet>
 				<h:outputText value="#{user.login}"/>
 			</h:column>								
 		</h:dataTable>
