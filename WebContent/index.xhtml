@@ -71,12 +71,19 @@
 				<h:outputText value="#{user.login}" />
 			</h:column>
 			<h:column>
-				<f:facet name="header">Editar</f:facet>
-				<h:commandLink value="Editar">
+				<f:facet name="header">Edit</f:facet>
+				<h:commandLink value="Edit">
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
 				</h:commandLink>
 			</h:column>
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+				<h:commandLink value="Delete" action="#{userPersonManagedBean.delete}">
+					<f:setPropertyActionListener value="#{user}"
+						target="#{userPersonManagedBean.userPerson}" />
+				</h:commandLink>
+			</h:column>			
 		</h:dataTable>
 	</h:form>
 

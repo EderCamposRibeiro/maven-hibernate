@@ -39,4 +39,10 @@ public class UserPersonManagedBean {
 		list = daoGeneric.list(UserPerson.class);
 		return list;
 	}
+	
+	public String delete() {
+		daoGeneric.deleteById(userPerson);
+		userPerson = new UserPerson();
+		return "";
+	}
 }
