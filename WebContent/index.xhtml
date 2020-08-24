@@ -17,67 +17,70 @@
 				value="#{userPersonManagedBean.userPerson.id}" />
 
 			<h:outputLabel>Name:</h:outputLabel>
-			<h:inputText 
-				value="#{userPersonManagedBean.userPerson.name}" />
+			<h:inputText value="#{userPersonManagedBean.userPerson.name}" />
 
 			<h:outputLabel>Surname:</h:outputLabel>
-			<h:inputText 
-				value="#{userPersonManagedBean.userPerson.surname}" />			
+			<h:inputText value="#{userPersonManagedBean.userPerson.surname}" />
 
 			<h:outputLabel>Email:</h:outputLabel>
-			<h:inputText 
-				value="#{userPersonManagedBean.userPerson.email}" />		
-							
+			<h:inputText value="#{userPersonManagedBean.userPerson.email}" />
+
 			<h:outputLabel>Age:</h:outputLabel>
-			<h:inputText 
-				value="#{userPersonManagedBean.userPerson.age}" />		
-				
+			<h:inputText value="#{userPersonManagedBean.userPerson.age}" />
+
 			<h:outputLabel>Login:</h:outputLabel>
-			<h:inputText 
-				value="#{userPersonManagedBean.userPerson.login}" />	
-				
+			<h:inputText value="#{userPersonManagedBean.userPerson.login}" />
+
 			<h:outputLabel>Password:</h:outputLabel>
-			<h:inputSecret 
-				value="#{userPersonManagedBean.userPerson.password}" />
-															
+			<h:inputSecret value="#{userPersonManagedBean.userPerson.password}" />
+
 		</h:panelGrid>
-		<br/>
-		<br/>
-		<h:commandButton value="Save" action="#{userPersonManagedBean.save}"/>
-		<h:commandButton value="New" action="#{userPersonManagedBean.newPerson}"/>
-		<br/>
-		<br/>
-		<h:dataTable value="#{userPersonManagedBean.list}" var="user" cellpadding="15" border="1">
-		
+		<br />
+		<br />
+		<h:commandButton value="Save" action="#{userPersonManagedBean.save}" />
+		<h:commandButton value="New"
+			action="#{userPersonManagedBean.newPerson}" />
+		<br />
+		<br />
+		<h:dataTable value="#{userPersonManagedBean.list}" var="user"
+			cellpadding="15" border="1">
+
 			<f:facet name="header">Lista de Usuários:</f:facet>
 			<h:column>
 				<f:facet name="header">Id:</f:facet>
-				<h:outputText value="#{user.id}"/>
+				<h:outputText value="#{user.id}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Name:</f:facet>
-				<h:outputText value="#{user.name}"/>
+				<h:outputText value="#{user.name}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Surname:</f:facet>
-				<h:outputText value="#{user.surname}"/>
-			</h:column>	
+				<h:outputText value="#{user.surname}" />
+			</h:column>
 			<h:column>
 				<f:facet name="header">Email:</f:facet>
-				<h:outputText value="#{user.email}"/>
-			</h:column>				
+				<h:outputText value="#{user.email}" />
+			</h:column>
 			<h:column>
 				<f:facet name="header">Age:</f:facet>
-				<h:outputText value="#{user.age}"/>
-			</h:column>					
+				<h:outputText value="#{user.age}" />
+			</h:column>
 			<h:column>
 				<f:facet name="header">Login:</f:facet>
-				<h:outputText value="#{user.login}"/>
-			</h:column>								
+				<h:outputText value="#{user.login}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Editar</f:facet>
+				<h:commandLink value="Editar">
+					<f:setPropertyActionListener value="#{user}"
+						target="#{userPersonManagedBean.userPerson}" />
+				</h:commandLink>
+			</h:column>
 		</h:dataTable>
 	</h:form>
-	
-	
+
+
 
 
 </h:body>
