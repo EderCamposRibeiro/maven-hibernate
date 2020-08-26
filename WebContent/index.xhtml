@@ -10,6 +10,17 @@
 
 <h:body>
 
+	<!-- <h:form>
+	          <p:breadCrumb>
+	          	  <p:menuitem /> 
+	              <p:menuitem value="JSF Page" action="index.jsf" />
+	              <p:menuitem value="PrimeFaces Page" action="primefaces.jsf" />
+	          </p:breadCrumb>
+	     <h:form>     -->
+
+	<h:link value="JSF Page" outcome="index.jsf"/><br/>
+	<h:link value="PrimeFaces Page" outcome="primefaces.jsf"/>
+
 	<h:form>
 		<h:messages showDetail="true" showSummary="false"/>
 		<h:panelGrid columns="2">
@@ -77,14 +88,14 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Edit</f:facet>
-				<h:commandLink value="Edit">
+				<h:commandLink value="Edit" immediate="true">
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
 				</h:commandLink>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Delete</f:facet>
-				<h:commandLink value="Delete" action="#{userPersonManagedBean.delete}">
+				<h:commandLink value="Delete" action="#{userPersonManagedBean.delete}" immediate="true">
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
 				</h:commandLink>
