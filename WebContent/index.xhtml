@@ -11,16 +11,19 @@
 <h:body>
 
 	<h:form>
+		<h:messages showDetail="true" showSummary="false"/>
 		<h:panelGrid columns="2">
 			<h:outputLabel>Id:</h:outputLabel>
 			<h:inputText readonly="true"
 				value="#{userPersonManagedBean.userPerson.id}" />
 
 			<h:outputLabel>Name:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.name}" />
+			<h:inputText value="#{userPersonManagedBean.userPerson.name}" required="true"
+			requiredMessage="The Name is required!" />
 
 			<h:outputLabel>Surname:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.surname}" />
+			<h:inputText value="#{userPersonManagedBean.userPerson.surname}" required="true"
+			requiredMessage="The Surname is required!"/>
 
 			<h:outputLabel>Email:</h:outputLabel>
 			<h:inputText value="#{userPersonManagedBean.userPerson.email}" />
@@ -29,10 +32,12 @@
 			<h:inputText value="#{userPersonManagedBean.userPerson.age}" />
 
 			<h:outputLabel>Login:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.login}" />
+			<h:inputText value="#{userPersonManagedBean.userPerson.login}" required="true"
+			requiredMessage="The Login is required!"/>
 
 			<h:outputLabel>Password:</h:outputLabel>
-			<h:inputSecret value="#{userPersonManagedBean.userPerson.password}" />
+			<h:inputSecret value="#{userPersonManagedBean.userPerson.password}" required="true"
+			requiredMessage="The Password is required!"/>
 
 		</h:panelGrid>
 		<br />
