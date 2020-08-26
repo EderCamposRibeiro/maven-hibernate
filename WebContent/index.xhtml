@@ -41,6 +41,12 @@
 
 			<h:outputLabel>Age:</h:outputLabel>
 			<h:inputText value="#{userPersonManagedBean.userPerson.age}" />
+			
+			<h:outputLabel>Sex:</h:outputLabel>
+			<h:selectOneMenu value="#{userPersonManagedBean.userPerson.sex}">
+				<f:selectItem itemValue="MASCULINO"/>
+				<f:selectItem itemValue="FEMININO"/>
+			</h:selectOneMenu>
 
 			<h:outputLabel>Login:</h:outputLabel>
 			<h:inputText value="#{userPersonManagedBean.userPerson.login}" required="true"

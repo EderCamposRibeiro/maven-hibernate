@@ -28,9 +28,18 @@ public class UserPerson {
 	private String login;
 	private String password;
 	private Integer age;
+	private String sex;
 	
 	@OneToMany(mappedBy = "userPerson", fetch = FetchType.EAGER)
 	private List<TelephoneUser> telephoneUsers;
+	
+	public String getSex() {
+		return sex;
+	}
+	
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
 	
 	public Integer getAge() {
 		return age;
@@ -99,7 +108,7 @@ public class UserPerson {
 	@Override
 	public String toString() {
 		return "UserPerson [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email
-				+ ", login=" + login + ", password=" + password + ", age=" + age + ", telephoneUsers=" + telephoneUsers
+				+ ", login=" + login + ", password=" + password + ", age=" + age + ", sex=" + sex + ", telephoneUsers=" + telephoneUsers
 				+ "]";
 	}
 
