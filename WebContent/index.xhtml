@@ -44,8 +44,8 @@
 			
 			<h:outputLabel>Sex:</h:outputLabel>
 			<h:selectOneMenu value="#{userPersonManagedBean.userPerson.sex}">
-				<f:selectItem itemValue="MASCULINO"/>
-				<f:selectItem itemValue="FEMININO"/>
+				<f:selectItem itemValue="MALE"/>
+				<f:selectItem itemValue="FEMALE"/>
 			</h:selectOneMenu>
 
 			<h:outputLabel>Login:</h:outputLabel>
@@ -60,7 +60,7 @@
 		<br />
 		<br />
 		<h:commandButton value="Save" action="#{userPersonManagedBean.save}" />
-		<h:commandButton value="New"
+		<h:commandButton value="New" 
 			action="#{userPersonManagedBean.newPerson}" />
 		<br />
 		<br />
@@ -94,14 +94,17 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Edit</f:facet>
-				<h:commandLink value="Edit" immediate="true">
+				<h:commandLink immediate="true" id="editbutton">
+					<h:graphicImage url="resources/img/edit.png" height="25" width="25"/>
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
+					<f:ajax execute="editbutton" render="@form"/>	
 				</h:commandLink>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Delete</f:facet>
-				<h:commandLink value="Delete" action="#{userPersonManagedBean.delete}" immediate="true">
+				<h:commandLink action="#{userPersonManagedBean.delete}" immediate="true">
+					<h:graphicImage url="resources/img/delete.png" height="25" width="25"/>
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
 				</h:commandLink>
