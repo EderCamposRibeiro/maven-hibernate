@@ -21,8 +21,8 @@
 	<h:link value="JSF Page" outcome="index.jsf"/><br/>
 	<h:link value="PrimeFaces Page" outcome="primefaces.jsf"/>
 
-	<h:form>
-		<h:messages showDetail="true" showSummary="false"/>
+	<h:form id="form">
+		<h:messages showDetail="true" showSummary="false" id="msg"/>
 		<h:panelGrid columns="2">
 			<h:outputLabel>Id:</h:outputLabel>
 			<h:inputText readonly="true"
@@ -64,6 +64,9 @@
 			action="#{userPersonManagedBean.newPerson}" />
 		<br />
 		<br />
+		</h:form>
+		
+		<h:form id="formtable">
 		<h:dataTable value="#{userPersonManagedBean.list}" var="user"
 			cellpadding="15" border="1">
 
@@ -98,15 +101,17 @@
 					<h:graphicImage url="resources/img/edit.png" height="25" width="25"/>
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
-					<f:ajax execute="editbutton" render="@form"/>	
+					<f:ajax execute="editbutton" render="@form :form:msg"/>	
 				</h:commandLink>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Delete</f:facet>
-				<h:commandLink action="#{userPersonManagedBean.delete}" immediate="true">
+				<h:commandLink action="#{userPersonManagedBean.delete}"
+				 immediate="true" id="deletebutton">
 					<h:graphicImage url="resources/img/delete.png" height="25" width="25"/>
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
+					<f:ajax execute="deletebutton" render="@form :form:msg"/>	
 				</h:commandLink>
 			</h:column>			
 		</h:dataTable>

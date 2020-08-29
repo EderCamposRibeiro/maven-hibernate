@@ -43,7 +43,7 @@ public class DaoGeneric<E> {
 		return e;
 	}
 
-	public void deleteById(E entity) {
+	public void deleteById(E entity) throws Exception{
 
 		Object id = HibernateUtil.getPrimaryKey(entity);
 
