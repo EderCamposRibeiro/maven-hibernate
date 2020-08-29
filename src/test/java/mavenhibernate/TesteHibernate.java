@@ -72,7 +72,12 @@ public class TesteHibernate {
 
 		UserPerson person = daoGeneric.find2(19L, UserPerson.class);
 
-		daoGeneric.deleteById(person);
+		try {
+			daoGeneric.deleteById(person);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

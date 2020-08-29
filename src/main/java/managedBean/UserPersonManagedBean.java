@@ -9,7 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import dao.DaoGeneric;
+import dao.DaoUser;
 import model.UserPerson;
 
 @ManagedBean(name = "userPersonManagedBean")
@@ -17,8 +17,8 @@ import model.UserPerson;
 public class UserPersonManagedBean {
 
 	private UserPerson userPerson = new UserPerson();
-	private DaoGeneric<UserPerson> daoGeneric = new DaoGeneric<UserPerson>();
 	private List<UserPerson> list = new ArrayList<UserPerson>();
+	private DaoUser<UserPerson> daoGeneric = new DaoUser<UserPerson>();
 	
 	/*After the Bean were constructed in the memmory this method will be executed*/
 	@PostConstruct
@@ -53,7 +53,7 @@ public class UserPersonManagedBean {
 	
 	public String delete() {
 		try {
-			daoGeneric.deleteById(userPerson);
+			daoGeneric.deleteUser(userPerson);
 			list.remove(userPerson);
 			userPerson = new UserPerson();
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -63,8 +63,10 @@ public class UserPersonManagedBean {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO,
 								"Information: ", "Cannot delete - Exist phone number for the user!"));
+			} else {
+				e.printStackTrace();
 			}
-			e.printStackTrace();
+			
 		}
 		
 
