@@ -1,11 +1,14 @@
 package managedBean;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import dao.DaoPhone;
 import dao.DaoUser;
+import model.TelephoneUser;
 import model.UserPerson;
 
 @ManagedBean(name = "telephoneManagedBean")
@@ -13,7 +16,9 @@ import model.UserPerson;
 public class TelephoneManagedBean {
 	
 	private UserPerson user = new UserPerson();
+	private TelephoneUser phoneuser = new TelephoneUser();
 	private DaoUser<UserPerson> daoUser = new DaoUser<UserPerson>();
+	private DaoPhone<TelephoneUser> daoPhone = new DaoPhone<TelephoneUser>();
 	
 	@PostConstruct
 	public void init ( ) {
@@ -21,8 +26,15 @@ public class TelephoneManagedBean {
 		String usercode = FacesContext.getCurrentInstance().getExternalContext()
 			.getRequestParameterMap().get("usercode");
 		user = daoUser.find2(Long.parseLong(usercode), UserPerson.class);
-
-		
+	}
+	
+	public String save() {
+		phoneuser.setUserPerson(user);
+		daoPhone.save(phoneuser);
+		phoneuser = new TelephoneUser();
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Information: ", "Save Successfully!"));
+		return "";
 	}
 	
 	public void setUser(UserPerson user) {
@@ -32,5 +44,22 @@ public class TelephoneManagedBean {
 	public UserPerson getUser() {
 		return user;
 	}
+	
+	public void setDaoPhone(DaoPhone<TelephoneUser> daoPhone) {
+		this.daoPhone = daoPhone;
+	}
+	
+	public DaoPhone<TelephoneUser> getDaoPhone() {
+		return daoPhone;
+	}
+	
+	public void setPhoneuser(TelephoneUser phoneuser) {
+		this.phoneuser = phoneuser;
+	}
+	
+	public TelephoneUser getPhoneuser() {
+		return phoneuser;
+	}
+	
 	
 }
