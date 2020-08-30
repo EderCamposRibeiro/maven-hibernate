@@ -113,7 +113,15 @@
 						target="#{userPersonManagedBean.userPerson}" />
 					<f:ajax execute="deletebutton" render="@form :form:msg"/>	
 				</h:commandLink>
-			</h:column>			
+			</h:column>	
+			<h:column>
+				<f:facet name="header">Phone</f:facet>
+				<h:commandLink action="phone.jsf"
+				 immediate="true" id="telephonebutton">
+					<h:graphicImage url="resources/img/phone.png" height="25" width="25"/>
+					<f:param name="usercode" value="#{user.id}"/>
+				</h:commandLink>
+			</h:column>						
 		</h:dataTable>
 	</h:form>
 
