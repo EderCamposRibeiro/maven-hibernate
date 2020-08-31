@@ -30,15 +30,17 @@ public class DaoGeneric<E> {
 
 	public E find(E entity) {
 		Object id = HibernateUtil.getPrimaryKey(entity);
-
-		E e = (E) entityManager.find(entity.getClass(), id);
+		entityManager.clear();
+		E e = (E) entityManager.createQuery("from " + ((Class<E>) entity).getSimpleName() +
+				" where id = " + id).getSingleResult();
 
 		return e;
 	}
 
 	public E find2(Long id, Class<E> entity) {
-
-		E e = (E) entityManager.find(entity, id);
+		entityManager.clear();
+		E e = (E) entityManager.createQuery("from " + entity.getSimpleName() +
+				" where id = " + id).getSingleResult();
 
 		return e;
 	}

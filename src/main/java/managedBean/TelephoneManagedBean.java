@@ -32,8 +32,18 @@ public class TelephoneManagedBean {
 		phoneuser.setUserPerson(user);
 		daoPhone.save(phoneuser);
 		phoneuser = new TelephoneUser();
+		user = daoUser.find2(user.getId(), UserPerson.class);
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Information: ", "Save Successfully!"));
+		return "";
+	}
+	
+	public String deletePhone() throws Exception {
+		daoPhone.deleteById(phoneuser);
+		user = daoUser.find2(user.getId(), UserPerson.class);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Information: ", "Removed Successfully!"));
+		phoneuser = new TelephoneUser();
 		return "";
 	}
 	

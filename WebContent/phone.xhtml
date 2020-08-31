@@ -42,9 +42,36 @@
 		<br />
 		<br />
 		<h:commandButton value="Save" action="#{telephoneManagedBean.save}" />		
-
-
 		
+	</h:form>
+	
+	<h:form id="formphones">
+		<h:dataTable value="#{telephoneManagedBean.user.telephoneUsers}" var="phone"
+			cellpadding="15" border="1" id="tablephones">
+			<f:facet name="header">Phones List</f:facet>
+			<h:column style="width:150px;">
+				<f:facet name="header">Id</f:facet>
+				<h:outputText value="#{phone.id}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Number</f:facet>
+				<h:outputText value="#{phone.number}"/>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Type</f:facet>
+				<h:outputText value="#{phone.type}"/>
+			</h:column>	
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+				<h:commandLink action="#{telephoneManagedBean.deletePhone}"
+				 immediate="true" id="deletebutton">
+					<h:graphicImage url="resources/img/delete.png" height="25" width="25"/>
+					<f:setPropertyActionListener value="#{phone}"
+						target="#{telephoneManagedBean.phoneuser}" />
+					<f:ajax execute="deletebutton" render="@form :form:msg"/>	
+				</h:commandLink>
+			</h:column>									
+		</h:dataTable>
 	</h:form>
 
 </h:body>
