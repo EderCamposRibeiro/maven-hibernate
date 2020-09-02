@@ -18,55 +18,97 @@
 	          </p:breadCrumb>
 	     <h:form>     -->
 
-	<h:link value="JSF Page" outcome="index.jsf"/><br/>
-	<h:link value="PrimeFaces Page" outcome="primefaces.jsf"/>
+	<h:link value="JSF Page" outcome="index.jsf" />
+	<br />
+	<h:link value="PrimeFaces Page" outcome="primefaces.jsf" />
 
 	<h:form id="form">
-		<h:messages showDetail="true" showSummary="false" id="msg"/>
+		<h:messages showDetail="true" showSummary="false" id="msg" />
 		<h:panelGrid columns="2">
 			<h:outputLabel>Id:</h:outputLabel>
 			<h:inputText readonly="true"
 				value="#{userPersonManagedBean.userPerson.id}" />
 
 			<h:outputLabel>Name:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.name}" required="true"
-			requiredMessage="The Name is required!" />
+			<h:inputText value="#{userPersonManagedBean.userPerson.name}"
+				required="true" requiredMessage="The Name is required!" />
 
 			<h:outputLabel>Surname:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.surname}" required="true"
-			requiredMessage="The Surname is required!"/>
+			<h:inputText value="#{userPersonManagedBean.userPerson.surname}"
+				required="true" requiredMessage="The Surname is required!" />
 
 			<h:outputLabel>Email:</h:outputLabel>
 			<h:inputText value="#{userPersonManagedBean.userPerson.email}" />
 
 			<h:outputLabel>Age:</h:outputLabel>
 			<h:inputText value="#{userPersonManagedBean.userPerson.age}" />
-			
+
 			<h:outputLabel>Sex:</h:outputLabel>
 			<h:selectOneMenu value="#{userPersonManagedBean.userPerson.sex}">
-				<f:selectItem itemValue="MALE"/>
-				<f:selectItem itemValue="FEMALE"/>
+				<f:selectItem itemValue="MALE" />
+				<f:selectItem itemValue="FEMALE" />
 			</h:selectOneMenu>
 
+			<h:outputLabel>Zip Code:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.cep}"
+				id="cepuser">
+				<f:ajax event="blur" execute="@this"
+					render="logradouro complemento bairro localidade uf ibge gia ddd siafi"
+					listener="#{userPersonManagedBean.findCep}" />
+			</h:inputText>
+
+			<h:outputLabel>Public Place:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.logradouro}"
+				id="logradouro" />
+
+			<h:outputLabel>Complement:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.complemento}"
+				id="complemento" />
+
+			<h:outputLabel>Neighborhood:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.bairro}"
+				id="bairro" />
+
+			<h:outputLabel>City:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.localidade}"
+				id="localidade" />
+
+			<h:outputLabel>State:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.uf}" id="uf" />
+
+			<h:outputLabel>IBGE:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.ibge}"
+				id="ibge" />
+
+			<h:outputLabel>Gia:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.gia}" id="gia" />
+
+			<h:outputLabel>Area Code:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.ddd}" id="ddd" />
+
+			<h:outputLabel>SIAFI:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.siafi}"
+				id="siafi" />
+
 			<h:outputLabel>Login:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.login}" required="true"
-			requiredMessage="The Login is required!"/>
+			<h:inputText value="#{userPersonManagedBean.userPerson.login}"
+				required="true" requiredMessage="The Login is required!" />
 
 			<h:outputLabel>Password:</h:outputLabel>
-			<h:inputSecret value="#{userPersonManagedBean.userPerson.password}" required="true"
-			requiredMessage="The Password is required!"/>
+			<h:inputSecret value="#{userPersonManagedBean.userPerson.password}"
+				required="true" requiredMessage="The Password is required!" />
 
 		</h:panelGrid>
 		<br />
 		<br />
 		<h:commandButton value="Save" action="#{userPersonManagedBean.save}" />
-		<h:commandButton value="New" 
+		<h:commandButton value="New"
 			action="#{userPersonManagedBean.newPerson}" />
 		<br />
 		<br />
-		</h:form>
-		
-		<h:form id="formtable">
+	</h:form>
+
+	<h:form id="formtable">
 		<h:dataTable value="#{userPersonManagedBean.list}" var="user"
 			cellpadding="15" border="1">
 
@@ -98,30 +140,32 @@
 			<h:column>
 				<f:facet name="header">Edit</f:facet>
 				<h:commandLink immediate="true" id="editbutton">
-					<h:graphicImage url="resources/img/edit.png" height="25" width="25"/>
+					<h:graphicImage url="resources/img/edit.png" height="25" width="25" />
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
-					
+
 				</h:commandLink>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Delete</f:facet>
 				<h:commandLink action="#{userPersonManagedBean.delete}"
-				 immediate="true" id="deletebutton">
-					<h:graphicImage url="resources/img/delete.png" height="25" width="25"/>
+					immediate="true" id="deletebutton">
+					<h:graphicImage url="resources/img/delete.png" height="25"
+						width="25" />
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
-					<f:ajax execute="deletebutton" render="@form :form:msg"/>	
+					<f:ajax execute="deletebutton" render="@form :form:msg" />
 				</h:commandLink>
-			</h:column>	
+			</h:column>
 			<h:column>
 				<f:facet name="header">Phone</f:facet>
-				<h:commandLink action="phone.jsf"
-				 immediate="true" id="telephonebutton">
-					<h:graphicImage url="resources/img/phone.png" height="25" width="25"/>
-					<f:param name="usercode" value="#{user.id}"/>
+				<h:commandLink action="phone.jsf" immediate="true"
+					id="telephonebutton">
+					<h:graphicImage url="resources/img/phone.png" height="25"
+						width="25" />
+					<f:param name="usercode" value="#{user.id}" />
 				</h:commandLink>
-			</h:column>						
+			</h:column>
 		</h:dataTable>
 	</h:form>
 

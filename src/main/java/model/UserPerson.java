@@ -12,10 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @Entity
-@NamedQueries({
-	@NamedQuery(name = "UserPerson.findAll", query = "select u from UserPerson u"),
-	@NamedQuery(name = "UserPerson.findByName", query = "select u from UserPerson u where u.name = :name")
-})
+@NamedQueries({ @NamedQuery(name = "UserPerson.findAll", query = "select u from UserPerson u"),
+		@NamedQuery(name = "UserPerson.findByName", query = "select u from UserPerson u where u.name = :name") })
 public class UserPerson {
 
 	@Id
@@ -29,22 +27,33 @@ public class UserPerson {
 	private String password;
 	private Integer age;
 	private String sex;
-	
+
+	private String cep;
+	private String logradouro;
+	private String complemento;
+	private String bairro;
+	private String localidade;
+	private String uf;
+	private String ibge;
+	private String gia;
+	private String ddd;
+	private String siafi;
+
 	@OneToMany(mappedBy = "userPerson", fetch = FetchType.EAGER)
 	private List<TelephoneUser> telephoneUsers;
-	
+
 	public String getSex() {
 		return sex;
 	}
-	
+
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	
+
 	public Integer getAge() {
 		return age;
 	}
-	
+
 	public void setAge(Integer age) {
 		this.age = age;
 	}
@@ -96,20 +105,102 @@ public class UserPerson {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public List<TelephoneUser> getTelephoneUsers() {
 		return telephoneUsers;
 	}
-	
+
 	public void setTelephoneUsers(List<TelephoneUser> telephoneUsers) {
 		this.telephoneUsers = telephoneUsers;
 	}
 
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getLogradouro() {
+		return logradouro;
+	}
+
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public String getLocalidade() {
+		return localidade;
+	}
+
+	public void setLocalidade(String localidade) {
+		this.localidade = localidade;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public String getIbge() {
+		return ibge;
+	}
+
+	public void setIbge(String ibge) {
+		this.ibge = ibge;
+	}
+
+	public String getGia() {
+		return gia;
+	}
+
+	public void setGia(String gia) {
+		this.gia = gia;
+	}
+
+	public String getDdd() {
+		return ddd;
+	}
+
+	public void setDdd(String ddd) {
+		this.ddd = ddd;
+	}
+
+	public String getSiafi() {
+		return siafi;
+	}
+
+	public void setSiafi(String siafi) {
+		this.siafi = siafi;
+	}
+
 	@Override
 	public String toString() {
-		return "UserPerson [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email
-				+ ", login=" + login + ", password=" + password + ", age=" + age + ", sex=" + sex + ", telephoneUsers=" + telephoneUsers
-				+ "]";
+		return "UserPerson [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", login="
+				+ login + ", password=" + password + ", age=" + age + ", sex=" + sex + ", cep=" + cep + ", logradouro="
+				+ logradouro + ", complemento=" + complemento + ", bairro=" + bairro + ", localidade=" + localidade
+				+ ", uf=" + uf + ", ibge=" + ibge + ", gia=" + gia + ", ddd=" + ddd + ", siafi=" + siafi
+				+ ", telephoneUsers=" + telephoneUsers + "]";
 	}
 
 	@Override
@@ -136,9 +227,5 @@ public class UserPerson {
 			return false;
 		return true;
 	}
-
-	
-	
-	
 
 }
