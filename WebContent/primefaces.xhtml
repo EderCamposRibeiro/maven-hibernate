@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem />
+			<p:menuitem value="JSF Page" action="index.jsf" />
+			<p:menuitem value="PrimeFaces Page" action="primefaces.jsf" />
+		</p:breadCrumb>
+	</h:form>
+
+	<h:form>
+		<p:panelGrid columns="2">
+			<p:column>
+				<p:outputLabel>Id:</p:outputLabel>
+				<p:inputText readonly="true"
+					value="#{userPersonManagedBean.userPerson.id}" />
+			</p:column>
+			<p:column>
+				<p:outputLabel>Name:</p:outputLabel>
+				<p:inputText value="#{userPersonManagedBean.userPerson.name}"
+					pt:placeholder="Insert user's name" required="true"
+					requiredMessage="The Name is required!" />
+			</p:column>
+			<p:column>
+				<p:outputLabel>Surname:</p:outputLabel>
+				<p:inputText value="#{userPersonManagedBean.userPerson.surname}"
+					pt:placeholder="Insert user's surname" required="true"
+					requiredMessage="The Surname is required!" />
+			</p:column>
+			<p:column>
+				<p:outputLabel>Email:</p:outputLabel>
+				<p:inputText value="#{userPersonManagedBean.userPerson.email}"
+					pt:placeholder="Insert user's email address!" />
+			</p:column>
+			<p:column>
+				<p:outputLabel>Age:</p:outputLabel>
+				<p:inputText value="#{userPersonManagedBean.userPerson.age}"
+					pt:placeholder="Insert user's age!" />
+			</p:column>
+
+			<p:column>
+				<p:outputLabel>Sex:</p:outputLabel>
+				<p:selectOneMenu value="#{userPersonManagedBean.userPerson.sex}">
+					<f:selectItem itemValue="MALE" />
+					<f:selectItem itemValue="FEMALE" />
+				</p:selectOneMenu>
+			</p:column>
+			<p:column>
+				<p:outputLabel>Login:</p:outputLabel>
+				<p:inputText value="#{userPersonManagedBean.userPerson.login}"
+					required="true" requiredMessage="The Login is required!" />
+			</p:column>
+			<p:column>
+				<p:outputLabel>Password:</p:outputLabel>
+				<p:password value="#{userPersonManagedBean.userPerson.password}"
+					required="true" requiredMessage="The Password is required!" />
+			</p:column>
+
+		</p:panelGrid>
+	</h:form>
+</h:body>
+
+</html>
