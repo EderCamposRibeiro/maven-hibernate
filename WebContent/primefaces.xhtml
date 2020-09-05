@@ -86,6 +86,9 @@
 			<p:column headerText="Age">
 				<h:outputText value="#{user.age}" />
 			</p:column>
+			<p:column headerText="Sex">
+				<h:outputText value="#{user.sex}" />
+			</p:column>			
 			<p:column headerText="Login">
 				<h:outputText value="#{user.login}" />
 			</p:column>
@@ -96,6 +99,14 @@
 						target="#{userPersonManagedBean.userPerson}" />
 				</h:commandLink>
 			</p:column>
+			<p:column headerText="Delete">
+				<h:commandLink id="deletebutton" immediate="true"
+					action="#{userPersonManagedBean.delete}">
+					<h:graphicImage url="resources/img/delete.png" height="25" width="25" />
+					<f:setPropertyActionListener value="#{user}" 
+						target="#{userPersonManagedBean.userPerson}" />
+				</h:commandLink>
+			</p:column>			
 
 		</p:dataTable>
 	</h:form>
