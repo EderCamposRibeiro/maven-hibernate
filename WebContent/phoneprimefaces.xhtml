@@ -11,7 +11,7 @@
 </h:head>
 
 <h:body>
-	<h1>PrimeFaces' Phone</h1>
+
 	<br/>
 	<h:form>
 		<p:breadCrumb>
@@ -25,40 +25,40 @@
 		<h:messages showDetail="true" showSummary="false" id="msg" />
 
 		<h:panelGrid columns="2">
-			<h:outputLabel>User:</h:outputLabel>
+			<p:outputLabel>User:</p:outputLabel>
 			<h:outputText value="#{telephoneManagedBean.user.name}" />
 
-			<h:outputLabel>Number:</h:outputLabel>
+			<p:outputLabel>Number:</p:outputLabel>
 			<h:inputText value="#{telephoneManagedBean.phoneuser.number}" />
 
-			<h:outputLabel>Type:</h:outputLabel>
+			<p:outputLabel>Type:</p:outputLabel>
 			<h:inputText value="#{telephoneManagedBean.phoneuser.type}" />
 
 		</h:panelGrid>
 
 		<br />
 		<br />
-		<h:commandButton value="Save" action="#{telephoneManagedBean.save}" />
+		<p:commandButton value="Save" action="#{telephoneManagedBean.save}" ajax="false"/>
 
 	</h:form>
 
 	<h:form id="formphones">
-		<h:dataTable value="#{telephoneManagedBean.user.telephoneUsers}"
+		<p:dataTable value="#{telephoneManagedBean.user.telephoneUsers}"
 			var="phone" cellpadding="15" border="1" id="tablephones">
 			<f:facet name="header">Phones List</f:facet>
-			<h:column style="width:150px;">
+			<p:column headerText="Phones List" style="width:150px;">
 				<f:facet name="header">Id</f:facet>
 				<h:outputText value="#{phone.id}" />
-			</h:column>
-			<h:column>
+			</p:column>
+			<p:column>
 				<f:facet name="header">Number</f:facet>
 				<h:outputText value="#{phone.number}" />
-			</h:column>
-			<h:column>
+			</p:column>
+			<p:column>
 				<f:facet name="header">Type</f:facet>
 				<h:outputText value="#{phone.type}" />
-			</h:column>
-			<h:column>
+			</p:column>
+			<p:column>
 				<f:facet name="header">Delete</f:facet>
 				<h:commandLink action="#{telephoneManagedBean.deletePhone}"
 					immediate="true" id="deletebutton">
@@ -68,8 +68,8 @@
 						target="#{telephoneManagedBean.phoneuser}" />
 					<f:ajax execute="deletebutton" render="@form :form:msg" />
 				</h:commandLink>
-			</h:column>
-		</h:dataTable>
+			</p:column>
+		</p:dataTable>
 	</h:form>
 
 </h:body>
