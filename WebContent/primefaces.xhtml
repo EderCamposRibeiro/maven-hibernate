@@ -21,9 +21,9 @@
 	</h:form>
 
 	<h:form id="form">
-		<p:messages autoUpdate="true" showDetail="true"/>
-		<br/>
-		<br/>
+		<p:messages autoUpdate="true" showDetail="true" />
+		<br />
+		<br />
 		<p:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 			<p:outputLabel>Id:</p:outputLabel>
 			<p:inputText readonly="true"
@@ -31,26 +31,27 @@
 
 			<p:outputLabel>Name:</p:outputLabel>
 			<p:inputText value="#{userPersonManagedBean.userPerson.name}"
-				pt:placeholder="Insert user's name" required="true"
-				requiredMessage="The Name is required!" />
+				required="true" requiredMessage="The Name is required!"
+				placeholder="Insert user's name" />
 
 			<p:outputLabel>Surname:</p:outputLabel>
 			<p:inputText value="#{userPersonManagedBean.userPerson.surname}"
-				pt:placeholder="Insert user's surname" required="true"
+				placeholder="Insert user's surname" required="true"
 				requiredMessage="The Surname is required!" />
 
 			<p:outputLabel>Email:</p:outputLabel>
 			<p:inputText value="#{userPersonManagedBean.userPerson.email}"
-				pt:placeholder="Insert user's email address!" />
+				placeholder="Insert user's email address!" />
 
 			<p:outputLabel>Age:</p:outputLabel>
 			<p:inputText value="#{userPersonManagedBean.userPerson.age}"
-				pt:placeholder="Insert user's age!" />
+				placeholder="Insert user's age!" />
 
 			<p:outputLabel>Sex:</p:outputLabel>
 			<p:selectOneMenu value="#{userPersonManagedBean.userPerson.sex}">
-				<f:selectItem itemLabel="M" itemValue="MALE" />
-				<f:selectItem itemLabel="F" itemValue="FEMALE" />
+				<f:selectItem itemLabel="MALE" itemValue="Male" />
+				<f:selectItem itemLabel="FEMALE" itemValue="Female" />
+				<f:selectItem itemLabel="NEUTRAL GENDER" itemValue="Neutral" />
 			</p:selectOneMenu>
 
 			<p:outputLabel>Login:</p:outputLabel>
@@ -70,8 +71,8 @@
 			action="#{userPersonManagedBean.newPerson}" />
 		<br />
 		<br />
-		</h:form>
-		<h:form id="formList">
+	</h:form>
+	<h:form id="formList">
 		<p:dataTable value="#{userPersonManagedBean.list}" var="user">
 			<f:facet name="header">User List</f:facet>
 			<p:column headerText="Id">
@@ -91,25 +92,26 @@
 			</p:column>
 			<p:column headerText="Sex">
 				<h:outputText value="#{user.sex}" />
-			</p:column>			
+			</p:column>
 			<p:column headerText="Login">
 				<h:outputText value="#{user.login}" />
 			</p:column>
 			<p:column headerText="Edit">
 				<h:commandLink id="editbutton" immediate="true">
 					<h:graphicImage url="resources/img/edit.png" height="25" width="25" />
-					<f:setPropertyActionListener value="#{user}" 
+					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
 				</h:commandLink>
 			</p:column>
 			<p:column headerText="Delete">
 				<h:commandLink id="deletebutton" immediate="true"
 					action="#{userPersonManagedBean.delete}">
-					<h:graphicImage url="resources/img/delete.png" height="25" width="25" />
-					<f:setPropertyActionListener value="#{user}" 
+					<h:graphicImage url="resources/img/delete.png" height="25"
+						width="25" />
+					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
 				</h:commandLink>
-			</p:column>			
+			</p:column>
 
 		</p:dataTable>
 	</h:form>
