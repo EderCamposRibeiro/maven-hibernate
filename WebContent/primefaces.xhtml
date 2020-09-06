@@ -12,7 +12,7 @@
 
 <h:body>
 
-	<h:form id="formLink">
+	<h:form id="formlink">
 		<p:breadCrumb>
 			<p:menuitem />
 			<p:menuitem value="JSF Page" action="index.jsf" />
@@ -67,12 +67,14 @@
 		<br />
 		<p:commandButton value="Save" ajax="false"
 			action="#{userPersonManagedBean.save}" />
-		<p:commandButton value="New" ajax="false"
-			action="#{userPersonManagedBean.newPerson}" />
+		<p:commandButton value="New" immediate="true"
+			action="#{userPersonManagedBean.newPerson}">
+			<f:ajax execute="@this" render="@form"/>
+		</p:commandButton>
 		<br />
 		<br />
 	</h:form>
-	<h:form id="formList">
+	<h:form id="formlist">
 		<p:dataTable value="#{userPersonManagedBean.list}" var="user">
 			<f:facet name="header">User List</f:facet>
 			<p:column headerText="Id">
@@ -101,6 +103,7 @@
 					<h:graphicImage url="resources/img/edit.png" height="25" width="25" />
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
+					<f:ajax execute="editbutton" render=":form"/>	
 				</h:commandLink>
 			</p:column>
 			<p:column headerText="Delete">
@@ -110,8 +113,17 @@
 						width="25" />
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
+					<f:ajax execute="deletebutton" render="@form"/>
 				</h:commandLink>
 			</p:column>
+			<p:column headerText="Phone">
+				<h:commandLink action="phoneprimefaces.jsf" immediate="true"
+					id="telephonebutton">
+					<h:graphicImage url="resources/img/phone.png" height="25"
+						width="25" />
+					<f:param name="usercode" value="#{user.id}" />
+				</h:commandLink>
+			</p:column>			
 
 		</p:dataTable>
 	</h:form>

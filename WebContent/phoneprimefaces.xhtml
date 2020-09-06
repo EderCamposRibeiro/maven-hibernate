@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+	<h1>PrimeFaces' Phone</h1>
+	<br/>
+	<h:form>
+		<p:breadCrumb>
+			<p:menuitem />
+			<p:menuitem value="JSF Page" action="index.jsf" />
+			<p:menuitem value="PrimeFaces Page" action="primefaces.jsf" />
+		</p:breadCrumb>
+	</h:form>
+
+	<h:form id="form">
+		<h:messages showDetail="true" showSummary="false" id="msg" />
+
+		<h:panelGrid columns="2">
+			<h:outputLabel>User:</h:outputLabel>
+			<h:outputText value="#{telephoneManagedBean.user.name}" />
+
+			<h:outputLabel>Number:</h:outputLabel>
+			<h:inputText value="#{telephoneManagedBean.phoneuser.number}" />
+
+			<h:outputLabel>Type:</h:outputLabel>
+			<h:inputText value="#{telephoneManagedBean.phoneuser.type}" />
+
+		</h:panelGrid>
+
+		<br />
+		<br />
+		<h:commandButton value="Save" action="#{telephoneManagedBean.save}" />
+
+	</h:form>
+
+	<h:form id="formphones">
+		<h:dataTable value="#{telephoneManagedBean.user.telephoneUsers}"
+			var="phone" cellpadding="15" border="1" id="tablephones">
+			<f:facet name="header">Phones List</f:facet>
+			<h:column style="width:150px;">
+				<f:facet name="header">Id</f:facet>
+				<h:outputText value="#{phone.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Number</f:facet>
+				<h:outputText value="#{phone.number}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Type</f:facet>
+				<h:outputText value="#{phone.type}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Delete</f:facet>
+				<h:commandLink action="#{telephoneManagedBean.deletePhone}"
+					immediate="true" id="deletebutton">
+					<h:graphicImage url="resources/img/delete.png" height="25"
+						width="25" />
+					<f:setPropertyActionListener value="#{phone}"
+						target="#{telephoneManagedBean.phoneuser}" />
+					<f:ajax execute="deletebutton" render="@form :form:msg" />
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+</h:body>
+
+</html>
