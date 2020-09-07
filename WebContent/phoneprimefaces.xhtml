@@ -22,19 +22,21 @@
 	</h:form>
 
 	<h:form id="form">
-		<h:messages showDetail="true" showSummary="false" id="msg" />
+		<p:messages showDetail="true" showSummary="false" id="msg" />
 
-		<h:panelGrid columns="2">
+		<p:panelGrid columns="2">
 			<p:outputLabel>User:</p:outputLabel>
-			<h:outputText value="#{telephoneManagedBean.user.name}" />
+			<p:outputLabel value="#{telephoneManagedBean.user.name}"  />
 
 			<p:outputLabel>Number:</p:outputLabel>
-			<h:inputText value="#{telephoneManagedBean.phoneuser.number}" />
+			<p:inputText value="#{telephoneManagedBean.phoneuser.number}"
+			required="true" requiredMessage=" You should insert the Phone Number!" />
 
 			<p:outputLabel>Type:</p:outputLabel>
-			<h:inputText value="#{telephoneManagedBean.phoneuser.type}" />
+			<p:inputText value="#{telephoneManagedBean.phoneuser.type}" 
+			required="true" requiredMessage=" You should insert the Phone Type!"/>
 
-		</h:panelGrid>
+		</p:panelGrid>
 
 		<br />
 		<br />
@@ -52,7 +54,7 @@
 			</p:column>
 			<p:column>
 				<f:facet name="header">Number</f:facet>
-				<h:outputText value="#{phone.number}" />
+				<h:outputText value="#{phone.number}"  />
 			</p:column>
 			<p:column>
 				<f:facet name="header">Type</f:facet>
