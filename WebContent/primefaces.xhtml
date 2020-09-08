@@ -30,9 +30,11 @@
 				value="#{userPersonManagedBean.userPerson.id}" />
 
 			<p:outputLabel>Name:</p:outputLabel>
-			<p:inputText value="#{userPersonManagedBean.userPerson.name}"
-				required="true" requiredMessage="The Name is required!"
-				placeholder="Insert user's name" />
+			<p:inputText id="name"
+				value="#{userPersonManagedBean.userPerson.name}" required="true"
+				requiredMessage="The Name is required!">
+				<p:watermark value="Insert user's name" for="name" />
+			</p:inputText>
 
 			<p:outputLabel>Surname:</p:outputLabel>
 			<p:inputText value="#{userPersonManagedBean.userPerson.surname}"
@@ -49,7 +51,7 @@
 
 			<p:outputLabel>Salary:</p:outputLabel>
 			<p:inputText value="#{userPersonManagedBean.userPerson.salary}"
-				placeholder="Insert user's Salary!" />				
+				placeholder="Insert user's Salary!" />
 
 			<p:outputLabel>Sex:</p:outputLabel>
 			<p:selectOneMenu value="#{userPersonManagedBean.userPerson.sex}">
@@ -58,47 +60,47 @@
 				<f:selectItem itemLabel="NEUTRAL GENDER" itemValue="Neutral" />
 			</p:selectOneMenu>
 
-			<h:outputLabel>Zip Code:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.cep}"
+			<p:outputLabel>Zip Code:</p:outputLabel>
+			<p:inputText value="#{userPersonManagedBean.userPerson.cep}"
 				id="cepuser" pt:placeholder="Insert user's zip code">
 				<f:ajax event="blur" execute="@this"
 					render="logradouro complemento bairro localidade uf ibge gia ddd siafi"
 					listener="#{userPersonManagedBean.findCep}" />
-			</h:inputText>
+			</p:inputText>
 
-			<h:outputLabel>Public Place:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.logradouro}"
+			<p:outputLabel>Public Place:</p:outputLabel>
+			<p:inputText value="#{userPersonManagedBean.userPerson.logradouro}"
 				id="logradouro" />
 
-			<h:outputLabel>Complement:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.complemento}"
+			<p:outputLabel>Complement:</p:outputLabel>
+			<p:inputText value="#{userPersonManagedBean.userPerson.complemento}"
 				id="complemento" />
 
-			<h:outputLabel>Neighborhood:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.bairro}"
+			<p:outputLabel>Neighborhood:</p:outputLabel>
+			<p:inputText value="#{userPersonManagedBean.userPerson.bairro}"
 				id="bairro" />
 
-			<h:outputLabel>City:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.localidade}"
+			<p:outputLabel>City:</p:outputLabel>
+			<p:inputText value="#{userPersonManagedBean.userPerson.localidade}"
 				id="localidade" />
 
-			<h:outputLabel>State:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.uf}" id="uf" />
+			<p:outputLabel>State:</p:outputLabel>
+			<p:inputText value="#{userPersonManagedBean.userPerson.uf}" id="uf" />
 
-			<h:outputLabel>IBGE:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.ibge}"
+			<p:outputLabel>IBGE:</p:outputLabel>
+			<p:inputText value="#{userPersonManagedBean.userPerson.ibge}"
 				id="ibge" />
 
-			<h:outputLabel>Gia:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.gia}" id="gia" />
+			<p:outputLabel>Gia:</p:outputLabel>
+			<p:inputText value="#{userPersonManagedBean.userPerson.gia}" id="gia" />
 
-			<h:outputLabel>Area Code:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.ddd}" id="ddd" />
+			<p:outputLabel>Area Code:</p:outputLabel>
+			<p:inputText value="#{userPersonManagedBean.userPerson.ddd}" id="ddd" />
 
-			<h:outputLabel>SIAFI:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.siafi}"
+			<p:outputLabel>SIAFI:</p:outputLabel>
+			<p:inputText value="#{userPersonManagedBean.userPerson.siafi}"
 				id="siafi" />
-			
+
 
 			<p:outputLabel>Login:</p:outputLabel>
 			<p:inputText value="#{userPersonManagedBean.userPerson.login}"
@@ -115,7 +117,7 @@
 			action="#{userPersonManagedBean.save}" />
 		<p:commandButton value="New" immediate="true"
 			action="#{userPersonManagedBean.newPerson}">
-			<f:ajax execute="@this" render="@form"/>
+			<f:ajax execute="@this" render="@form" />
 		</p:commandButton>
 		<br />
 		<br />
@@ -149,7 +151,7 @@
 					<h:graphicImage url="resources/img/edit.png" height="25" width="25" />
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
-					<f:ajax execute="editbutton" render=":form"/>	
+					<f:ajax execute="editbutton" render=":form" />
 				</h:commandLink>
 			</p:column>
 			<p:column headerText="Delete">
@@ -159,7 +161,7 @@
 						width="25" />
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
-					<f:ajax execute="deletebutton" render="@form"/>
+					<f:ajax execute="deletebutton" render="@form" />
 				</h:commandLink>
 			</p:column>
 			<p:column headerText="Phone">
@@ -169,12 +171,12 @@
 						width="25" />
 					<f:param name="usercode" value="#{user.id}" />
 				</h:commandLink>
-			</p:column>			
+			</p:column>
 
 		</p:dataTable>
 	</h:form>
-	
-	<p:chart type="bar" model="#{userPersonManagedBean.barChartModel}"/>
+
+	<p:chart type="bar" model="#{userPersonManagedBean.barChartModel}" />
 </h:body>
 
 </html>
