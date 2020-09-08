@@ -47,6 +47,10 @@
 			<p:inputText value="#{userPersonManagedBean.userPerson.age}"
 				placeholder="Insert user's age!" />
 
+			<p:outputLabel>Salary:</p:outputLabel>
+			<p:inputText value="#{userPersonManagedBean.userPerson.salary}"
+				placeholder="Insert user's Salary!" />				
+
 			<p:outputLabel>Sex:</p:outputLabel>
 			<p:selectOneMenu value="#{userPersonManagedBean.userPerson.sex}">
 				<f:selectItem itemLabel="MALE" itemValue="Male" />
@@ -127,6 +131,8 @@
 
 		</p:dataTable>
 	</h:form>
+	
+	<p:chart type="bar" model="#{userPersonManagedBean.barChartModel}"/>
 </h:body>
 
 </html>

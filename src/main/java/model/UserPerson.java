@@ -38,6 +38,8 @@ public class UserPerson {
 	private String gia;
 	private String ddd;
 	private String siafi;
+	
+	private Double salary;
 
 	@OneToMany(mappedBy = "userPerson", fetch = FetchType.EAGER)
 	private List<TelephoneUser> telephoneUsers;
@@ -194,13 +196,21 @@ public class UserPerson {
 		this.siafi = siafi;
 	}
 
+	public Double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Double salary) {
+		this.salary = salary;
+	}
+
 	@Override
 	public String toString() {
 		return "UserPerson [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", login="
 				+ login + ", password=" + password + ", age=" + age + ", sex=" + sex + ", cep=" + cep + ", logradouro="
 				+ logradouro + ", complemento=" + complemento + ", bairro=" + bairro + ", localidade=" + localidade
-				+ ", uf=" + uf + ", ibge=" + ibge + ", gia=" + gia + ", ddd=" + ddd + ", siafi=" + siafi
-				+ ", telephoneUsers=" + telephoneUsers + "]";
+				+ ", uf=" + uf + ", ibge=" + ibge + ", gia=" + gia + ", ddd=" + ddd + ", siafi=" + siafi + ", salary="
+				+ salary + ", telephoneUsers=" + telephoneUsers + "]";
 	}
 
 	@Override

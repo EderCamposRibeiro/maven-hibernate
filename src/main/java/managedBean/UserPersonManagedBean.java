@@ -15,6 +15,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.ChartSeries;
+
 import com.google.gson.Gson;
 
 import dao.DaoUser;
@@ -27,6 +30,7 @@ public class UserPersonManagedBean {
 	private UserPerson userPerson = new UserPerson();
 	private List<UserPerson> list = new ArrayList<UserPerson>();
 	private DaoUser<UserPerson> daoGeneric = new DaoUser<UserPerson>();
+	private BarChartModel barChartModel = new BarChartModel();
 
 	/*
 	 * After the Bean were constructed in the memmory this method will be executed
@@ -34,6 +38,24 @@ public class UserPersonManagedBean {
 	@PostConstruct
 	public void init() {
 		list = daoGeneric.list(UserPerson.class);
+		
+		/*Group of Employees*/
+		ChartSeries userSalary = new ChartSeries();
+		
+		userSalary.setLabel("Users");
+		
+		/*Add salary to the group*/
+		for (UserPerson userPerson : list) {
+			/*Add salary*/
+			userSalary.set(userPerson.getName(), userPerson.getSalary());
+		}
+		/*add the group in the BarModel*/
+		barChartModel.addSeries(userSalary);
+		barChartModel.setTitle("Employees' Salary");
+	}
+	
+	public BarChartModel getBarChartModel() {
+		return barChartModel;
 	}
 
 	public void findCep(AjaxBehaviorEvent event) {
