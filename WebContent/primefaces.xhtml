@@ -58,6 +58,48 @@
 				<f:selectItem itemLabel="NEUTRAL GENDER" itemValue="Neutral" />
 			</p:selectOneMenu>
 
+			<h:outputLabel>Zip Code:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.cep}"
+				id="cepuser" pt:placeholder="Insert user's zip code">
+				<f:ajax event="blur" execute="@this"
+					render="logradouro complemento bairro localidade uf ibge gia ddd siafi"
+					listener="#{userPersonManagedBean.findCep}" />
+			</h:inputText>
+
+			<h:outputLabel>Public Place:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.logradouro}"
+				id="logradouro" />
+
+			<h:outputLabel>Complement:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.complemento}"
+				id="complemento" />
+
+			<h:outputLabel>Neighborhood:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.bairro}"
+				id="bairro" />
+
+			<h:outputLabel>City:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.localidade}"
+				id="localidade" />
+
+			<h:outputLabel>State:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.uf}" id="uf" />
+
+			<h:outputLabel>IBGE:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.ibge}"
+				id="ibge" />
+
+			<h:outputLabel>Gia:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.gia}" id="gia" />
+
+			<h:outputLabel>Area Code:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.ddd}" id="ddd" />
+
+			<h:outputLabel>SIAFI:</h:outputLabel>
+			<h:inputText value="#{userPersonManagedBean.userPerson.siafi}"
+				id="siafi" />
+			
+
 			<p:outputLabel>Login:</p:outputLabel>
 			<p:inputText value="#{userPersonManagedBean.userPerson.login}"
 				required="true" requiredMessage="The Login is required!" />
