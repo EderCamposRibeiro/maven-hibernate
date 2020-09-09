@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -22,7 +23,6 @@ public class UserPerson {
 
 	private String name;
 	private String surname;
-	private String email;
 	private String login;
 	private String password;
 	private Integer age;
@@ -42,7 +42,10 @@ public class UserPerson {
 	private Double salary;
 
 	@OneToMany(mappedBy = "userPerson", fetch = FetchType.EAGER)
-	private List<TelephoneUser> telephoneUsers;
+	private List<TelephoneUser> telephoneUsers = new ArrayList<TelephoneUser>();
+	
+	@OneToMany(mappedBy = "userPerson", fetch = FetchType.LAZY)
+	private List<EmailUser> emailUsers = new ArrayList<EmailUser>();	
 
 	public String getSex() {
 		return sex;
@@ -84,14 +87,6 @@ public class UserPerson {
 		this.surname = surname;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getLogin() {
 		return login;
 	}
@@ -114,6 +109,14 @@ public class UserPerson {
 
 	public void setTelephoneUsers(List<TelephoneUser> telephoneUsers) {
 		this.telephoneUsers = telephoneUsers;
+	}
+	
+	public List<EmailUser> getEmailUsers() {
+		return emailUsers;
+	}
+	
+	public void setEmailUsers(List<EmailUser> emailUsers) {
+		this.emailUsers = emailUsers;
 	}
 
 	public String getCep() {
@@ -204,13 +207,15 @@ public class UserPerson {
 		this.salary = salary;
 	}
 
+	
+	
 	@Override
 	public String toString() {
-		return "UserPerson [id=" + id + ", name=" + name + ", surname=" + surname + ", email=" + email + ", login="
-				+ login + ", password=" + password + ", age=" + age + ", sex=" + sex + ", cep=" + cep + ", logradouro="
-				+ logradouro + ", complemento=" + complemento + ", bairro=" + bairro + ", localidade=" + localidade
-				+ ", uf=" + uf + ", ibge=" + ibge + ", gia=" + gia + ", ddd=" + ddd + ", siafi=" + siafi + ", salary="
-				+ salary + ", telephoneUsers=" + telephoneUsers + "]";
+		return "UserPerson [id=" + id + ", name=" + name + ", surname=" + surname + ", login=" + login + ", password="
+				+ password + ", age=" + age + ", sex=" + sex + ", cep=" + cep + ", logradouro=" + logradouro
+				+ ", complemento=" + complemento + ", bairro=" + bairro + ", localidade=" + localidade + ", uf=" + uf
+				+ ", ibge=" + ibge + ", gia=" + gia + ", ddd=" + ddd + ", siafi=" + siafi + ", salary=" + salary
+				+ ", telephoneUsers=" + telephoneUsers + ", emailUsers=" + emailUsers + "]";
 	}
 
 	@Override

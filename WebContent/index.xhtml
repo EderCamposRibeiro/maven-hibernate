@@ -37,10 +37,6 @@
 				pt:placeholder="Insert user's surname" required="true"
 				requiredMessage="The Surname is required!" />
 
-			<h:outputLabel>Email:</h:outputLabel>
-			<h:inputText value="#{userPersonManagedBean.userPerson.email}"
-				pt:placeholder="Insert user's email address" />
-
 			<h:outputLabel>Age:</h:outputLabel>
 			<h:inputText value="#{userPersonManagedBean.userPerson.age}"
 				pt:placeholder="Insert user's age" />
@@ -131,10 +127,6 @@
 			<h:column>
 				<f:facet name="header">Surname</f:facet>
 				<h:outputText value="#{user.surname}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">Email</f:facet>
-				<h:outputText value="#{user.email}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Age</f:facet>

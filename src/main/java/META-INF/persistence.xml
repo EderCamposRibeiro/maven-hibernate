@@ -8,6 +8,7 @@
 	
 		<class>model.UserPerson</class>
 		<class>model.TelephoneUser</class>
+		<class>model.EmailUser</class>
 	
 		<properties>
 			<!-- Dados de conexão com o banco -->
