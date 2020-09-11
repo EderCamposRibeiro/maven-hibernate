@@ -166,7 +166,23 @@
 				</h:commandLink>
 			</p:column>
 
+			<p:column headerText="E-mails">
+				<p:commandLink update=":formlist:dialogemail"
+					oncomplete="PF('dialogemail').show()">
+					<f:setPropertyActionListener value="#{user}"
+						target="#{userPersonManagedBean.userPerson}" />
+					<h:graphicImage width="25" height="25"
+						url="resources/img/emails.jpg" />
+				</p:commandLink>
+			</p:column>
+
 		</p:dataTable>
+
+		<p:dialog header="E-mails" widgetVar="dialogemail" id="dialogemail"
+			position="center" modal="true" width="490px">
+
+		</p:dialog>
+
 	</h:form>
 	<p:chart type="bar" model="#{userPersonManagedBean.barChartModel}" />
 </h:body>
