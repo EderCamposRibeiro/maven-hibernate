@@ -20,7 +20,9 @@ import org.primefaces.model.chart.ChartSeries;
 
 import com.google.gson.Gson;
 
+import dao.DaoEmail;
 import dao.DaoUser;
+import model.EmailUser;
 import model.UserPerson;
 
 @ManagedBean(name = "userPersonManagedBean")
@@ -31,6 +33,8 @@ public class UserPersonManagedBean {
 	private List<UserPerson> list = new ArrayList<UserPerson>();
 	private DaoUser<UserPerson> daoGeneric = new DaoUser<UserPerson>();
 	private BarChartModel barChartModel = new BarChartModel();
+	private EmailUser emailUser = new EmailUser();
+	private DaoEmail<EmailUser> daoEmail = new DaoEmail<EmailUser>();
 
 	/*
 	 * After the Bean were constructed in the memmory this method will be executed
@@ -137,5 +141,22 @@ public class UserPersonManagedBean {
 		}
 
 		return "";
+	}
+	
+	public EmailUser getEmailUser() {
+		return emailUser;
+	}
+	
+	public void setEmailUser(EmailUser emailUser) {
+		this.emailUser = emailUser;
+	}
+	
+	public void addEmail() {
+		emailUser.setUserPerson(userPerson);
+		emailUser = daoEmail.updateMerge(emailUser);
+		userPerson.getEmailUsers().add(emailUser);
+		emailUser = new EmailUser();
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+				"Information: ", "Save Successfully!"));
 	}
 }
