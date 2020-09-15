@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -38,14 +39,14 @@ public class UserPerson {
 	private String gia;
 	private String ddd;
 	private String siafi;
-	
+
 	private Double salary;
 
-	@OneToMany(mappedBy = "userPerson", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "userPerson", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<TelephoneUser> telephoneUsers = new ArrayList<TelephoneUser>();
-	
-	@OneToMany(mappedBy = "userPerson", fetch = FetchType.LAZY)
-	private List<EmailUser> emailUsers = new ArrayList<EmailUser>();	
+
+	@OneToMany(mappedBy = "userPerson", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
+	private List<EmailUser> emailUsers = new ArrayList<EmailUser>();
 
 	public String getSex() {
 		return sex;
@@ -110,11 +111,11 @@ public class UserPerson {
 	public void setTelephoneUsers(List<TelephoneUser> telephoneUsers) {
 		this.telephoneUsers = telephoneUsers;
 	}
-	
+
 	public List<EmailUser> getEmailUsers() {
 		return emailUsers;
 	}
-	
+
 	public void setEmailUsers(List<EmailUser> emailUsers) {
 		this.emailUsers = emailUsers;
 	}
@@ -207,8 +208,6 @@ public class UserPerson {
 		this.salary = salary;
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		return "UserPerson [id=" + id + ", name=" + name + ", surname=" + surname + ", login=" + login + ", password="
