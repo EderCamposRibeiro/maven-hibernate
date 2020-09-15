@@ -26,7 +26,7 @@
 		</p:growl>
 		<br />
 		<br />
-		<p:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+		<h:panelGrid columns="4" style="margin-bottom:10px" cellpadding="5">
 			<p:outputLabel>Id:</p:outputLabel>
 			<p:inputText readonly="true"
 				value="#{userPersonManagedBean.userPerson.id}" />
@@ -44,15 +44,15 @@
 				requiredMessage="The Surname is required!" />
 
 			<p:outputLabel>Age:</p:outputLabel>
-			<p:inputText value="#{userPersonManagedBean.userPerson.age}"
+			<p:inputNumber value="#{userPersonManagedBean.userPerson.age}"
 				placeholder="Insert user's age!" />
 
 			<p:outputLabel>Salary:</p:outputLabel>
-			<p:inputText value="#{userPersonManagedBean.userPerson.salary}"
+			<p:inputNumber value="#{userPersonManagedBean.userPerson.salary}"
 				placeholder="Insert user's Salary!" />
 
 			<p:outputLabel>Sex:</p:outputLabel>
-			<p:selectOneMenu value="#{userPersonManagedBean.userPerson.sex}">
+			<p:selectOneMenu style="width:190" value="#{userPersonManagedBean.userPerson.sex}">
 				<f:selectItem itemLabel="MALE" itemValue="Male" />
 				<f:selectItem itemLabel="FEMALE" itemValue="Female" />
 				<f:selectItem itemLabel="NEUTRAL GENDER" itemValue="Neutral" />
@@ -108,7 +108,7 @@
 			<p:password value="#{userPersonManagedBean.userPerson.password}"
 				required="true" requiredMessage="The Password is required!" />
 
-		</p:panelGrid>
+		</h:panelGrid>
 		<br />
 		<br />
 		<p:commandButton value="Save" ajax="false"
@@ -123,33 +123,36 @@
 	<h:form id="formlist">
 		<p:dataTable value="#{userPersonManagedBean.list}" var="user">
 			<f:facet name="header">User List</f:facet>
-			<p:column headerText="Id">
+			<p:column headerText="Id" width="20">
 				<h:outputText value="#{user.id}" />
 			</p:column>
-			<p:column headerText="Name">
+			<p:column headerText="Name" width="600">
 				<h:outputText value="#{user.name}" />
 			</p:column>
-			<p:column headerText="Surname">
+			<!-- <p:column headerText="Surname">
 				<h:outputText value="#{user.surname}" />
 			</p:column>
 			<p:column headerText="Age">
 				<h:outputText value="#{user.age}" />
-			</p:column>
+			</p:column>  -->
 			<p:column headerText="Sex">
 				<h:outputText value="#{user.sex}" />
 			</p:column>
-			<p:column headerText="Login">
+			<!-- <p:column headerText="Login">
 				<h:outputText value="#{user.login}" />
-			</p:column>
+			</p:column> -->
 			<p:column headerText="Edit">
+				<center>
 				<h:commandLink id="editbutton" immediate="true">
 					<h:graphicImage url="resources/img/edit.png" height="25" width="25" />
 					<f:setPropertyActionListener value="#{user}"
 						target="#{userPersonManagedBean.userPerson}" />
 					<f:ajax execute="editbutton" render=":form" />
 				</h:commandLink>
+				</center>
 			</p:column>
 			<p:column headerText="Delete">
+				<center>
 				<h:commandLink id="deletebutton" immediate="true"
 					action="#{userPersonManagedBean.delete}">
 					<h:graphicImage url="resources/img/delete.png" height="25"
@@ -158,17 +161,21 @@
 						target="#{userPersonManagedBean.userPerson}" />
 					<f:ajax execute="deletebutton" render="@form" />
 				</h:commandLink>
+				</center>
 			</p:column>
 			<p:column headerText="Phone">
+				<center>
 				<h:commandLink action="phoneprimefaces.jsf" immediate="true"
 					id="telephonebutton">
 					<h:graphicImage url="resources/img/phone.png" height="25"
 						width="25" />
 					<f:param name="usercode" value="#{user.id}" />
 				</h:commandLink>
+				</center>
 			</p:column>
 
 			<p:column headerText="E-mails">
+				<center>
 				<p:commandLink update=":formlist:dialogemail"
 					oncomplete="PF('dialogemail').show()">
 					<f:setPropertyActionListener value="#{user}"
@@ -176,6 +183,7 @@
 					<h:graphicImage width="25" height="25"
 						url="resources/img/emails.jpg" />
 				</p:commandLink>
+				</center>
 			</p:column>
 
 		</p:dataTable>
@@ -183,25 +191,26 @@
 		<p:dialog header="E-mails" widgetVar="dialogemail" id="dialogemail"
 			position="center" modal="true" width="600px" resizable="false">
 			<p:outputLabel>User: </p:outputLabel>
-			<p:outputLabel value="#{userPersonManagedBean.userPerson.name}"/>
-			<p:panelGrid columns="3">
+			<p:outputLabel value="#{userPersonManagedBean.userPerson.name}" />
+			<h:panelGrid columns="3">
 				<h:outputLabel value="Email" />
 				<p:inputText value="#{userPersonManagedBean.emailUser.email}"
-					id="emailuseradd" />
+					id="emailuseradd" style="width:447px"/>
 				<p:commandButton value="Add"
 					actionListener="#{userPersonManagedBean.addEmail}"
 					update="emailuseradd, dataTableEmail">
 				</p:commandButton>
-			</p:panelGrid>
+			</h:panelGrid>
 			<p:dataTable value="#{userPersonManagedBean.userPerson.emailUsers}"
 				var="email" id="dataTableEmail">
-				<p:column headerText="Id">
+				<p:column headerText="Id" width="20">
 					<p:outputLabel value="#{email.id}" />
 				</p:column>
-				<p:column headerText="Email">
+				<p:column headerText="Email" >
 					<h:outputText value="#{email.email}" />
 				</p:column>
-				<p:column headerText="Delete">
+				<p:column headerText="Delete" width="50">
+					<center>
 					<p:commandLink id="removeEmailButton"
 						actionListener="#{userPersonManagedBean.deleteEmail}"
 						update="dataTableEmail">
@@ -209,6 +218,7 @@
 						<p:graphicImage width="25" height="25"
 							url="resources/img/delete.png" />
 					</p:commandLink>
+					</center>
 				</p:column>
 			</p:dataTable>
 		</p:dialog>
