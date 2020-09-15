@@ -21,7 +21,9 @@
 	</h:form>
 
 	<h:form id="form">
-		<p:growl autoUpdate="true" showDetail="true" />
+		<p:growl id="growl" showDetail="true">
+			<p:autoUpdate />
+		</p:growl>
 		<br />
 		<br />
 		<p:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
@@ -179,18 +181,36 @@
 		</p:dataTable>
 
 		<p:dialog header="E-mails" widgetVar="dialogemail" id="dialogemail"
-			position="center" modal="true" width="490px" resizable="false">
-
+			position="center" modal="true" width="600px" resizable="false">
+			<p:outputLabel>User: </p:outputLabel>
+			<p:outputLabel value="#{userPersonManagedBean.userPerson.name}"/>
 			<p:panelGrid columns="3">
 				<h:outputLabel value="Email" />
 				<p:inputText value="#{userPersonManagedBean.emailUser.email}"
 					id="emailuseradd" />
-				<p:commandButton value="Save"
+				<p:commandButton value="Add"
 					actionListener="#{userPersonManagedBean.addEmail}"
-					update="emailuseradd">
+					update="emailuseradd, dataTableEmail">
 				</p:commandButton>
 			</p:panelGrid>
-
+			<p:dataTable value="#{userPersonManagedBean.userPerson.emailUsers}"
+				var="email" id="dataTableEmail">
+				<p:column headerText="Id">
+					<p:outputLabel value="#{email.id}" />
+				</p:column>
+				<p:column headerText="Email">
+					<h:outputText value="#{email.email}" />
+				</p:column>
+				<p:column headerText="Delete">
+					<p:commandLink id="removeEmailButton"
+						actionListener="#{userPersonManagedBean.deleteEmail}"
+						update="dataTableEmail">
+						<f:param name="emailcode" value="#{email.id}" />
+						<p:graphicImage width="25" height="25"
+							url="resources/img/delete.png" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
 		</p:dialog>
 
 	</h:form>

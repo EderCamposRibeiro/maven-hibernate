@@ -42,44 +42,43 @@ public class UserPersonManagedBean {
 	@PostConstruct
 	public void init() {
 		list = daoGeneric.list(UserPerson.class);
-		
-		/*Group of Employees*/
+
+		/* Group of Employees */
 		ChartSeries userSalary = new ChartSeries();
-		
+
 		userSalary.setLabel("Users");
-		
-		/*Add salary to the group*/
+
+		/* Add salary to the group */
 		for (UserPerson userPerson : list) {
-			/*Add salary*/
+			/* Add salary */
 			userSalary.set(userPerson.getName(), userPerson.getSalary());
 		}
-		/*add the group in the BarModel*/
+		/* add the group in the BarModel */
 		barChartModel.addSeries(userSalary);
 		barChartModel.setTitle("Employees' Salary");
 	}
-	
+
 	public BarChartModel getBarChartModel() {
 		return barChartModel;
 	}
 
 	public void findCep(AjaxBehaviorEvent event) {
 		try {
-			
-			URL url = new URL("https://viacep.com.br/ws/"+ userPerson.getCep() +"/json/");
+
+			URL url = new URL("https://viacep.com.br/ws/" + userPerson.getCep() + "/json/");
 			URLConnection connection = url.openConnection();
 			InputStream is = connection.getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-			
+
 			String cep = "";
 			StringBuilder jsonCep = new StringBuilder();
-			
+
 			while ((cep = br.readLine()) != null) {
 				jsonCep.append(cep);
 			}
-			
-			UserPerson userCepPerson = new Gson().
-					fromJson(jsonCep.toString(), UserPerson.class);
-			
+
+			UserPerson userCepPerson = new Gson().fromJson(jsonCep.toString(), UserPerson.class);
+
 			userPerson.setCep(userCepPerson.getCep());
 			userPerson.setLogradouro(userCepPerson.getLogradouro());
 			userPerson.setComplemento(userCepPerson.getComplemento());
@@ -90,9 +89,9 @@ public class UserPersonManagedBean {
 			userPerson.setGia(userCepPerson.getGia());
 			userPerson.setDdd(userCepPerson.getDdd());
 			userPerson.setSiafi(userCepPerson.getSiafi());
-			
+
 			System.out.println(userPerson);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -142,21 +141,33 @@ public class UserPersonManagedBean {
 
 		return "";
 	}
-	
+
 	public EmailUser getEmailUser() {
 		return emailUser;
 	}
-	
+
 	public void setEmailUser(EmailUser emailUser) {
 		this.emailUser = emailUser;
 	}
-	
+
 	public void addEmail() {
 		emailUser.setUserPerson(userPerson);
 		emailUser = daoEmail.updateMerge(emailUser);
 		userPerson.getEmailUsers().add(emailUser);
 		emailUser = new EmailUser();
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Information: ", "Save Successfully!"));
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Information: ", "Save Successfully!"));
+	}
+
+	public void deleteEmail() throws Exception {
+		String emailcode = FacesContext.getCurrentInstance().
+				getExternalContext().getRequestParameterMap().get("emailcode");
+		EmailUser remove = new EmailUser();
+		remove.setId(Long.parseLong(emailcode));
+		daoEmail.deleteById(remove);
+		userPerson.getEmailUsers().remove(remove);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Information: ", "Removed Successfully!"));
+		
 	}
 }
