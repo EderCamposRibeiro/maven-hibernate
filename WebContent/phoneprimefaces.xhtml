@@ -22,19 +22,24 @@
 	</h:form>
 
 	<h:form id="form">
-		<p:messages showDetail="true" showSummary="false" id="msg" />
+		<p:growl showDetail="true" showSummary="false" id="msg" />
 
 		<p:panelGrid columns="2">
 			<p:outputLabel>User:</p:outputLabel>
 			<p:outputLabel value="#{telephoneManagedBean.user.name}"  />
 
 			<p:outputLabel>Number:</p:outputLabel>
-			<p:inputText value="#{telephoneManagedBean.phoneuser.number}"
+			<p:inputMask value="#{telephoneManagedBean.phoneuser.number}"
+			mask="(99) 9 9999-9999" 
 			required="true" requiredMessage=" You should insert the Phone Number!" />
 
 			<p:outputLabel>Type:</p:outputLabel>
-			<p:inputText value="#{telephoneManagedBean.phoneuser.type}" 
-			required="true" requiredMessage=" You should insert the Phone Type!"/>
+			<p:selectOneMenu value="#{telephoneManagedBean.phoneuser.type}" 
+			required="true" requiredMessage=" You should insert the Phone Type!" style="width:191">
+				<f:selectItem itemValue="CELLPHONE" itemLabel="Cellphone"/>
+				<f:selectItem itemValue="HOME" itemLabel="Home"/>
+				<f:selectItem itemValue="WORK" itemLabel="Work"/>
+			</p:selectOneMenu>
 
 		</p:panelGrid>
 
@@ -48,20 +53,26 @@
 		<p:dataTable value="#{telephoneManagedBean.user.telephoneUsers}"
 			var="phone" cellpadding="15" border="1" id="tablephones">
 			<f:facet name="header">Phones List</f:facet>
-			<p:column headerText="Phones List" style="width:150px;">
+			<p:column headerText="Phones List" style="width:150px;" width="20">
 				<f:facet name="header">Id</f:facet>
 				<h:outputText value="#{phone.id}" />
 			</p:column>
 			<p:column>
+				<center>
 				<f:facet name="header">Number</f:facet>
 				<h:outputText value="#{phone.number}"  />
+				</center>
 			</p:column>
 			<p:column>
+				<center>
 				<f:facet name="header">Type</f:facet>
 				<h:outputText value="#{phone.type}" />
+				</center>
 			</p:column>
-			<p:column>
+			<p:column width="50">
+				
 				<f:facet name="header">Delete</f:facet>
+				<center>
 				<h:commandLink action="#{telephoneManagedBean.deletePhone}"
 					immediate="true" id="deletebutton">
 					<h:graphicImage url="resources/img/delete.png" height="25"
@@ -70,6 +81,7 @@
 						target="#{telephoneManagedBean.phoneuser}" />
 					<f:ajax execute="deletebutton" render="@form :form:msg" />
 				</h:commandLink>
+				</center>
 			</p:column>
 		</p:dataTable>
 	</h:form>
