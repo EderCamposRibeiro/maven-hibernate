@@ -41,6 +41,7 @@ public class UserPersonManagedBean {
 	 */
 	@PostConstruct
 	public void init() {
+		barChartModel = new BarChartModel();
 		list = daoGeneric.list(UserPerson.class);
 
 		/* Group of Employees */
@@ -90,7 +91,6 @@ public class UserPersonManagedBean {
 			userPerson.setDdd(userCepPerson.getDdd());
 			userPerson.setSiafi(userCepPerson.getSiafi());
 
-			System.out.println(userPerson);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -108,6 +108,7 @@ public class UserPersonManagedBean {
 	public String save() {
 		daoGeneric.save(userPerson);
 		list.add(userPerson);
+		init(); //To recharges the BarChart
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Information: ", "Save Successfully!"));
 		return ""; /* If returns Null stays on the same screen */
@@ -127,6 +128,7 @@ public class UserPersonManagedBean {
 			daoGeneric.deleteUser(userPerson);
 			list.remove(userPerson);
 			userPerson = new UserPerson();
+			init(); //To recharges the BarChart
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Information: ", "Removed Successfully!"));
 		} catch (Exception e) {
