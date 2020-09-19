@@ -35,14 +35,20 @@ public class UserPersonManagedBean {
 	private BarChartModel barChartModel = new BarChartModel();
 	private EmailUser emailUser = new EmailUser();
 	private DaoEmail<EmailUser> daoEmail = new DaoEmail<EmailUser>();
+	private String searchField;
 
 	/*
 	 * After the Bean were constructed in the memmory this method will be executed
 	 */
 	@PostConstruct
 	public void init() {
-		barChartModel = new BarChartModel();
 		list = daoGeneric.list(UserPerson.class);
+
+		buildGraphic();
+	}
+
+	private void buildGraphic() {
+		barChartModel = new BarChartModel();
 
 		/* Group of Employees */
 		ChartSeries userSalary = new ChartSeries();
@@ -171,5 +177,18 @@ public class UserPersonManagedBean {
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Information: ", "Removed Successfully!"));
 		
+	}
+	
+	public void search() {
+		list = daoGeneric.find(searchField);
+		buildGraphic();
+	}
+	
+	public void setSearchField(String searchField) {
+		this.searchField = searchField;
+	}
+	
+	public String getSearchField() {
+		return searchField;
 	}
 }

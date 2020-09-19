@@ -120,6 +120,17 @@
 		<br />
 		<br />
 	</h:form>
+	
+	<h:form>
+		<p:panel header="Search User">
+			<h:panelGrid columns="3">
+				<h:outputLabel value="Name:"/>
+				<p:inputText value="#{userPersonManagedBean.searchField}"/>
+				<p:commandButton value="Search" actionListener="#{userPersonManagedBean.search}" update="formlist, graphic"/>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+	
 	<h:form id="formlist">
 		<p:dataTable value="#{userPersonManagedBean.list}" var="user">
 			<f:facet name="header">User List</f:facet>
