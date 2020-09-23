@@ -107,6 +107,13 @@
 			<p:outputLabel>Password:</p:outputLabel>
 			<p:password value="#{userPersonManagedBean.userPerson.password}"
 				required="true" requiredMessage="The Password is required!" />
+				
+			<p:outputLabel>Photo:</p:outputLabel>
+			<p:fileUpload mode="advanced" label="Add" auto="true" update="image"
+			fileUploadListener="#{userPersonManagedBean.upload}"/>	
+			
+			<p:outputLabel>Image:</p:outputLabel>
+			<h:graphicImage id="image" value="#{userPersonManagedBean.userPerson.image}" width="228" height="200"/>
 
 		</h:panelGrid>
 		<br />
