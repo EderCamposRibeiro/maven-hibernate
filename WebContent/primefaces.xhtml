@@ -147,15 +147,24 @@
 			<p:column headerText="Name" width="600">
 				<h:outputText value="#{user.name}" />
 			</p:column>
+			<p:column headerText="Image">
+				<center>
+				<h:commandLink immediate="true"
+					actionListener="#{userPersonManagedBean.download}">
+					<f:param name="fileDownloadId" value="#{user.id}"/>
+					<h:graphicImage url="resources/img/download.png" height="25" width="25"/>
+				</h:commandLink>
+				</center>
+			</p:column>			
 			<!-- <p:column headerText="Surname">
 				<h:outputText value="#{user.surname}" />
 			</p:column>
 			<p:column headerText="Age">
 				<h:outputText value="#{user.age}" />
-			</p:column>  -->
+			</p:column>  
 			<p:column headerText="Sex">
 				<h:outputText value="#{user.sex}" />
-			</p:column>
+			</p:column>-->
 			<!-- <p:column headerText="Login">
 				<h:outputText value="#{user.login}" />
 			</p:column> -->
