@@ -139,7 +139,8 @@
 	</h:form>
 	
 	<h:form id="formlist">
-		<p:dataTable value="#{userPersonManagedBean.list}" var="user">
+		<p:dataTable value="#{userPersonManagedBean.list}" var="user" rows="5" paginator="true" lazy="true" paginatorPosition="bottom"
+			paginatorTemplate="{FirstPageLink} {PageLinks} {LastPageLink}">
 			<f:facet name="header">User List</f:facet>
 			<p:column headerText="Id" width="20">
 				<h:outputText value="#{user.id}" />

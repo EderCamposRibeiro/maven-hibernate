@@ -6,8 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -28,6 +26,7 @@ import com.google.gson.Gson;
 
 import dao.DaoEmail;
 import dao.DaoUser;
+import datatablelazy.LazyDataTableModelUserPerson;
 import model.EmailUser;
 import model.UserPerson;
 
@@ -36,20 +35,16 @@ import model.UserPerson;
 public class UserPersonManagedBean {
 
 	private UserPerson userPerson = new UserPerson();
-	private List<UserPerson> list = new ArrayList<UserPerson>();
+	private LazyDataTableModelUserPerson<UserPerson> list = new LazyDataTableModelUserPerson<UserPerson>();
 	private DaoUser<UserPerson> daoGeneric = new DaoUser<UserPerson>();
 	private BarChartModel barChartModel = new BarChartModel();
 	private EmailUser emailUser = new EmailUser();
 	private DaoEmail<EmailUser> daoEmail = new DaoEmail<EmailUser>();
 	private String searchField;
 
-	/*
-	 * After the Bean were constructed in the memmory this method will be executed
-	 */
 	@PostConstruct
 	public void init() {
-		list = daoGeneric.list(UserPerson.class);
-
+		list.load(0, 5, null, null, null);
 		buildGraphic();
 	}
 
@@ -62,7 +57,7 @@ public class UserPersonManagedBean {
 		userSalary.setLabel("Users");
 
 		/* Add salary to the group */
-		for (UserPerson userPerson : list) {
+		for (UserPerson userPerson : list.list) {
 			/* Add salary */
 			userSalary.set(userPerson.getName(), userPerson.getSalary());
 		}
@@ -103,7 +98,6 @@ public class UserPersonManagedBean {
 			userPerson.setDdd(userCepPerson.getDdd());
 			userPerson.setSiafi(userCepPerson.getSiafi());
 
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -119,8 +113,8 @@ public class UserPersonManagedBean {
 
 	public String save() {
 		daoGeneric.save(userPerson);
-		list.add(userPerson);
-		init(); //To recharges the BarChart
+		list.list.add(userPerson);
+		init(); // To recharges the BarChart
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Information: ", "Save Successfully!"));
 		return ""; /* If returns Null stays on the same screen */
@@ -131,16 +125,17 @@ public class UserPersonManagedBean {
 		return "";
 	}
 
-	public List<UserPerson> getList() {
+	public LazyDataTableModelUserPerson<UserPerson> getList() {
+		buildGraphic();
 		return list;
 	}
 
 	public String delete() {
 		try {
 			daoGeneric.deleteUser(userPerson);
-			list.remove(userPerson);
+			list.list.remove(userPerson);
 			userPerson = new UserPerson();
-			init(); //To recharges the BarChart
+			init(); // To recharges the BarChart
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Information: ", "Removed Successfully!"));
 		} catch (Exception e) {
@@ -174,45 +169,46 @@ public class UserPersonManagedBean {
 	}
 
 	public void deleteEmail() throws Exception {
-		String emailcode = FacesContext.getCurrentInstance().
-				getExternalContext().getRequestParameterMap().get("emailcode");
+		String emailcode = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap()
+				.get("emailcode");
 		EmailUser remove = new EmailUser();
 		remove.setId(Long.parseLong(emailcode));
 		daoEmail.deleteById(remove);
 		userPerson.getEmailUsers().remove(remove);
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Information: ", "Removed Successfully!"));
-		
+
 	}
-	
+
 	public void search() {
-		list = daoGeneric.find(searchField);
+		list.search(searchField);
 		buildGraphic();
 	}
-	
+
 	public void setSearchField(String searchField) {
 		this.searchField = searchField;
 	}
-	
+
 	public String getSearchField() {
 		return searchField;
 	}
-	
+
 	public void upload(FileUploadEvent image) {
 		String image64 = "data:image/png;base64," + DatatypeConverter.printBase64Binary(image.getFile().getContents());
 		userPerson.setImage(image64);
 	}
-	
+
 	public void download() throws IOException {
 		Map<String, String> parms = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		String fileDownloadId = parms.get("fileDownloadId");
-		
+
 		UserPerson person = daoGeneric.find2(Long.parseLong(fileDownloadId), UserPerson.class);
-		
+
 		byte[] image = new Base64().decodeBase64(person.getImage().split("\\,")[1]);
-		
-		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-		
+
+		HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext()
+				.getResponse();
+
 		response.addHeader("Content-Disposition", "attachment; filename=download.png");
 		response.setContentType("application/octet-stream");
 		response.setContentLength(image.length);
@@ -221,7 +217,3 @@ public class UserPersonManagedBean {
 		FacesContext.getCurrentInstance().responseComplete();
 	}
 }
-
-
-
-
